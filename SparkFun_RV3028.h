@@ -38,9 +38,10 @@ Distributed as-is; no warranty is given.
 
 //Bits in Control1 Register
 #define CTRL1_STOP	7
-#define CTRL1_12_24	6
 #define CTRL1_PSWB	5
 #define CTRL1_ARST						1 << 2 //Enables reset of interrupt flags in status register 
+
+#define CTRL2_12_24	1
 
 //Bits in Hours register
 #define HOURS_AM_PM						5
