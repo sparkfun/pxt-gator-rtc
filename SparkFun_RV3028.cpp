@@ -37,7 +37,6 @@ enum time_order {
 
 uint8_t _time[TIME_ARRAY_LENGTH];
 
-
 //Configure RTC to output 1-12 hours
 //Converts any current hour setting to 12 hour
 void RV3028::set12Hour()
@@ -90,9 +89,9 @@ void RV3028::set24Hour()
 		}
 		
 		//Change to 24 hour mode
-		uint8_t setting = readRegister(RV3028_CTRL1);
+		uint8_t setting = readRegister(RV3028_CTRL2);
 		setting &= ~(1<<CTRL2_12_24); //Clear the 12/24 hr bit
-		writeRegister(RV3028_CTRL1, setting);
+		writeRegister(RV3028_CTRL2, setting);
 
 		//Given a BCD hour in the 1-12 range, make it 24
 		hour = BCDtoDEC(hour); //Convert core of register to DEC
@@ -110,7 +109,7 @@ void RV3028::set24Hour()
 //Returns true if RTC has been configured for 12 hour mode
 bool RV3028::is12Hour()
 {
-	uint8_t controlRegister = readRegister(RV3028_CTRL1);
+	uint8_t controlRegister = readRegister(RV3028_CTRL2);
 	return(controlRegister & (1<<CTRL2_12_24));
 }
 
