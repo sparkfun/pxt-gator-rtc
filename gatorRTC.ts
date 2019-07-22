@@ -13,7 +13,7 @@
 
 
 /**
- * Functions to operate the gatorlog sensor
+ * Functions to operate the gatorrtc sensor
  */
 
  enum TimeType{
@@ -49,26 +49,29 @@
 //% color=#f44242 
 //% icon="\uf0ce"
 namespace gatorRTC {
-	
-	/**
-	* Set RTC time in HH:MM:SS in 24 hour format
-	*/
-	//% weight=49
-	//% blockId="gatorRTC_set24Time"
-	//% block="set time to %hours | : %minutes | : %seconds in 24 hour mode"
-	//% shim=gatorRTC::set24Time
-	export function set24Time(hours: number, minutes: number, seconds: number){
-		return
-	}
+	// Functions for reading and setting time on the gator:RTC
+
 	
 	/**
 	* Set RTC time in HH:MM:SS in 12 hour format format
 	*/
-	//% weight=48
+	//% weight=49
 	//% blockId="gatorRTC_set12Time"
-	//% block="set time to %hours | %amPm | : %minutes | : %seconds in 12 hour mode"
+	//% block="set time to %hours | : %minutes | : %seconds | - %amPm"
 	//% shim=gatorRTC::set12Time
-	export function set12Time(hours: number, amPm: Afternoon, minutes: number, seconds: number){
+	export function set12Time(hours: number, minutes: number, seconds: number, amPm: Afternoon){
+		return
+	}
+	
+	/**
+	* Set RTC time in HH:MM:SS in 24 hour format
+	*/
+	//% weight=48
+	//% blockId="gatorRTC_set24Time"
+	//% block="set time to %hours | : %minutes | : %seconds in 24 hour mode"
+	//% shim=gatorRTC::set24Time
+	//% advanced=true
+	export function set24Time(hours: number, minutes: number, seconds: number){
 		return
 	}
 	
@@ -90,6 +93,7 @@ namespace gatorRTC {
 	//% blockId="gatorRTC_setTimeComponent"
 	//% block="set %timeComponent | to %value"
 	//% shim=gatorRTC::setTimeComponent
+	//% advanced=true
 	export function setTimeComponent(timeComponent: TimeType, value: number){
 		return
 	}
@@ -112,6 +116,7 @@ namespace gatorRTC {
 	//% blockId="gatorRTC_getTimeStamp"
 	//% block="Timestamp in yyyy-mm-ddThh:mm:ss"
 	//% shim=gatorRTC::getTimeStamp
+	//% advanced=true
 	export function getTimeStamp(): string{
 		return "1995-05-2110:10:10"
 	}
@@ -134,6 +139,7 @@ namespace gatorRTC {
 	//% blockId="gatorRTC_getDate"
 	//% block="Date in mm-dd-yyyy"
 	//% shim=gatorRTC::getDate
+	//% advanced=true
 	export function getDate(): string{
 		return "21-05-1995"
 	}
@@ -145,6 +151,7 @@ namespace gatorRTC {
 	//% blockId="gatorRTC_getTimeComponent"
 	//% block="Value of %timeComponent"
 	//% shim=gatorRTC::getTimeComponent
+	//% advanced=true
 	export function getTimeComponent(timeComponent: TimeType): number{
 		return 0
 	}
