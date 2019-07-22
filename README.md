@@ -46,5 +46,5 @@ basic.forever(function () {
 MIT
 
 ```package
-gatorParticle=github:sparkfun/pxt-gator-particle
+gatorRTC=github:sparkfun/pxt-gator-rtc
 ```

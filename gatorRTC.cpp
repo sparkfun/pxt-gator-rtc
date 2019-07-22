@@ -25,20 +25,24 @@ using namespace pxt;
 namespace gatorRTC {
 	MicroBitI2C i2c(I2C_SDA0, I2C_SCL0);
 	RV3028 *rtc; //BME280 handles our Temp, pressure, and humidity
-
 	
 	//%
-	void setToCompilerTime(String value)
+	void set24Time(uint8_t hours, uint8_t minutes, uint8_t seconds)
 	{
-		rtc->setToCompilerTime();	
-	}
-	
-	//%
-	void setTime(uint8_t hours, uint8_t minutes, uint8_t seconds)
-	{
+		rtc->set24Hour();
 		rtc->setHours(hours);
 		rtc->setMinutes(minutes);
 		rtc->setSeconds(seconds);	
+	}
+	
+	//%
+	void set12Time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t amPm)
+	{
+		rtc->set24Hour();
+		rtc->setHours(hours + (amPm * 12));
+		rtc->setMinutes(minutes);
+		rtc->setSeconds(seconds);	
+		rtc->set12Hour();
 	}
 	
 	//%
