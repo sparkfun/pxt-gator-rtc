@@ -66,7 +66,7 @@ namespace gatorRTC {
 	*/
 	//% weight=48
 	//% blockId="gatorRTC_set12Time"
-	//% block="set time to %hours | : %minutes | : %seconds | - %amPm"
+	//% block="set time to %hours | : %minutes | : %seconds | : %amPm"
 	//% shim=gatorRTC::set12Time
 	export function set12Time(hours: number, minutes: number, seconds: number, amPm: Afternoon){
 		return
