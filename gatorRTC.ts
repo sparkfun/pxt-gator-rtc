@@ -55,7 +55,7 @@ namespace gatorRTC {
 	*/
 	//% weight=49
 	//% blockId="gatorRTC_set24Time"
-	//% block="set time to %hours |:%minutes |:%seconds in 24 hour mode"
+	//% block="set time to %hours | : %minutes | : %seconds in 24 hour mode"
 	//% shim=gatorRTC::set24Time
 	export function set24Time(hours: number, minutes: number, seconds: number){
 		return
@@ -66,7 +66,7 @@ namespace gatorRTC {
 	*/
 	//% weight=48
 	//% blockId="gatorRTC_set12Time"
-	//% block="set time to %hours | :%minutes | :%seconds | - %amPm"
+	//% block="set time to %hours | : %minutes | : %seconds | - %amPm"
 	//% shim=gatorRTC::set12Time
 	export function set12Time(hours: number, minutes: number, seconds: number, amPm: Afternoon){
 		return
