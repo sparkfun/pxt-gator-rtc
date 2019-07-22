@@ -269,51 +269,6 @@ uint8_t RV3028::getWeekday()
 	return BCDtoDEC(_time[TIME_DAY]);
 }
 
-//Takes the time from the last build and uses it as the current time
-//Works very well as an arduino sketch
-bool RV3028::setToCompilerTime()
-{
-	_time[TIME_SECONDS] = DECtoBCD(BUILD_SECOND);
-	_time[TIME_MINUTES] = DECtoBCD(BUILD_MINUTE);
-	_time[TIME_HOURS] = DECtoBCD(BUILD_HOUR);
-
-	//Build_Hour is 0-23, convert to 1-12 if needed
-	if (is12Hour())
-	{
-		uint8_t hour = BUILD_HOUR;
-
-		bool pm = false;
-
-		if(hour == 0)
-			hour += 12;
-		else if(hour == 12)
-			pm = true;
-		else if(hour > 12)
-		{
-			hour -= 12;
-			pm = true;
-		}
-
-		_time[TIME_HOURS] = DECtoBCD(hour); //Load the modified hours
-	
-		if(pm == true) _time[TIME_HOURS] |= (1<<HOURS_AM_PM); //Set AM/PM bit if needed
-	}
-	
-	_time[TIME_MONTH] = DECtoBCD(BUILD_MONTH);
-	_time[TIME_DATE] = DECtoBCD(BUILD_DATE);
-	_time[TIME_YEAR] = DECtoBCD(BUILD_YEAR - 2000); //! Not Y2K (or Y2.1K)-proof :(
-	
-	// Calculate weekday (from here: http://stackoverflow.com/a/21235587)
-	// 0 = Sunday, 6 = Saturday
-	uint16_t d = BUILD_DATE;
-	uint16_t m = BUILD_MONTH;
-	uint16_t y = BUILD_YEAR;
-	uint16_t weekday = (d+=m<3?y--:y-2,23*m/9+d+4+y/4-y/100+y/400)%7 + 1;
-	_time[TIME_DAY] = DECtoBCD(weekday);
-	
-	return setTime(_time, TIME_ARRAY_LENGTH);
-}
-
 uint8_t RV3028::BCDtoDEC(uint8_t val)
 {
 	return ( ( val / 0x10) * 10 ) + ( val % 0x10 );

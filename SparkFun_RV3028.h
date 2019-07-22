@@ -173,8 +173,6 @@ class RV3028
 	uint8_t getMonth();
 	uint8_t getYear();	
 	
-	bool setToCompilerTime(); //Uses the hours, mins, etc from compile time to set RTC
-	
 	bool is12Hour(); //Returns true if 12hour bit is set
 	bool isPM(); //Returns true if is12Hour and PM bit is set
 	void set12Hour();
