@@ -26,7 +26,7 @@ Distributed as-is; no warranty is given.
 #endif
 
 //The 7-bit I2C address of the RV3028
-#define RV3028_ADDR						0b1010010
+#define RV3028_ADDR						0b10100100
 
 //The upper part of the part number is always 0x18
 #define RV3028_PART_NUMBER_UPPER		0x18
@@ -40,7 +40,7 @@ Distributed as-is; no warranty is given.
 #define CTRL1_STOP	7
 #define CTRL1_PSWB	5
 #define CTRL1_ARST						1 << 2 //Enables reset of interrupt flags in status register 
-
+\
 #define CTRL2_12_24	1
 
 //Bits in Hours register
