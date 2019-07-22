@@ -21,7 +21,22 @@ Distributed as-is; no warranty is given.
 #include "MicroBit.h"
 #endif
 
+#define TIME_ARRAY_LENGTH 7 // Total number of writable values in device
+
 static MicroBitI2C i2c(I2C_SDA0, I2C_SCL0);
+
+enum time_order {
+	TIME_SECONDS,    // 0
+	TIME_MINUTES,    // 1
+	TIME_HOURS,      // 2
+	TIME_DAY,
+	TIME_DATE,       // 3
+	TIME_MONTH,      // 4
+	TIME_YEAR,       // 5
+};
+
+uint8_t _time[TIME_ARRAY_LENGTH];
+
 
 //Configure RTC to output 1-12 hours
 //Converts any current hour setting to 12 hour

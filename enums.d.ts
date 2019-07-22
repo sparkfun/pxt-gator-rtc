@@ -9,13 +9,10 @@ declare namespace gatorRTC {
     Andy England @ SparkFun Electronics
     February 5, 2018
     https://github.com/sparkfun/Qwiic_RTC
-        Resources:
-    Uses Wire.h for i2c operation
-    Uses SPI.h for SPI operation
         Development environment specifics:
     Arduino IDE 1.6.4
         This code is released under the [MIT License](http://opensource.org/licenses/MIT).
-    Please review the LICENSE.md file included with this example. If you have any questions 
+    Please review the LICENSE.md file included with this example. If you have any questions
     or concerns with licensing, please contact techsupport@sparkfun.com.
     Distributed as-is; no warranty is given.
      ******************************************************************************/

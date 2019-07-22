@@ -129,19 +129,6 @@ Distributed as-is; no warranty is given.
 #define RV3028_EEPROM_CMD				0x27
 #define RV3028_ID						0x28
 
-
-#define TIME_ARRAY_LENGTH 7 // Total number of writable values in device
-
-enum time_order {
-	TIME_SECONDS,    // 0
-	TIME_MINUTES,    // 1
-	TIME_HOURS,      // 2
-	TIME_DAY,
-	TIME_DATE,       // 3
-	TIME_MONTH,      // 4
-	TIME_YEAR,       // 5
-};
-
 class RV3028
 {
   public:
@@ -190,7 +177,4 @@ class RV3028
     void writeRegister(uint8_t addr, uint8_t val);
 	void readMultipleRegisters(uint8_t addr, uint8_t * dest, uint8_t len);
 	void writeMultipleRegisters(uint8_t addr, uint8_t * values, uint8_t len);
-
-private:
-	uint8_t _time[TIME_ARRAY_LENGTH];
 };

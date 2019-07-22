@@ -114,7 +114,7 @@ namespace gatorRTC {
 	*/
 	//% weight=45
 	//% blockId="gatorRTC_getTimeStamp"
-	//% block="Timestamp in yyyy-mm-ddThh:mm:ss"
+	//% block="timestamp in yyyy-mm-ddThh:mm:ss"
 	//% shim=gatorRTC::getTimeStamp
 	//% advanced=true
 	export function getTimeStamp(): string{
@@ -126,7 +126,7 @@ namespace gatorRTC {
 	*/
 	//% weight=44
 	//% blockId="gatorRTC_getDateUSA"
-	//% block="Date in mm-dd-yyyy"
+	//% block="date in mm-dd-yyyy"
 	//% shim=gatorRTC::getDateUSA
 	export function getDateUSA(): string{
 		return "05-21-1995"
@@ -137,7 +137,7 @@ namespace gatorRTC {
 	*/
 	//% weight=43
 	//% blockId="gatorRTC_getDate"
-	//% block="Date in mm-dd-yyyy"
+	//% block="date in mm-dd-yyyy"
 	//% shim=gatorRTC::getDate
 	//% advanced=true
 	export function getDate(): string{
@@ -149,7 +149,7 @@ namespace gatorRTC {
 	*/
 	//% weight=42
 	//% blockId="gatorRTC_getTimeComponent"
-	//% block="Value of %timeComponent"
+	//% block="value of %timeComponent"
 	//% shim=gatorRTC::getTimeComponent
 	//% advanced=true
 	export function getTimeComponent(timeComponent: TimeType): number{
