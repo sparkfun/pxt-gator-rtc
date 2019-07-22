@@ -36,9 +36,8 @@ namespace gatorRTC {
 	}
 	
 	//%
-	void set12Time(uint8_t hours, uint8_t minutes, uint8_t seconds)
+	void set12Time(uint8_t hours, uint8_t minutes, uint8_t seconds, uint8_t amPm)
 	{
-		uint8_t amPm = 1;
 		rtc->set24Hour();
 		rtc->setHours(hours + (amPm * 12));
 		rtc->setMinutes(minutes);
