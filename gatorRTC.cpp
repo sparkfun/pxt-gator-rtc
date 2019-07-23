@@ -83,7 +83,7 @@ namespace gatorRTC {
 	}
 	
 	//%
-	uint16_t getTimeComponent(uint8_t timeComponent)
+	uint16_t getTimeComponent(uint8_t timeComponent, bool updateTime)
 	{
 		rtc->updateTime();
 		uint16_t returnValue;
@@ -121,7 +121,9 @@ namespace gatorRTC {
 	String getDateUSA()
 	{
 		rtc->updateTime();
-		return (String)rtc->stringDateUSA();
+		static char date[11]; //Max of mm/dd/yyyy with \0 terminator
+		sprintf(date, "%02d/%02d/20%02d", rtc->getMonth(), rtc->getDate(), rtc->getYear());
+		return (String)date;
 	}
 	
 	//%

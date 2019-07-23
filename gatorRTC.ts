@@ -136,11 +136,11 @@ namespace gatorRTC {
 	* Get RTC date in dd-mm-yyyy
 	*/
 	//% weight=43
-	//% blockId="gatorRTC_getDate"
+	//% blockId="gatorRTC_getDateWorld"
 	//% block="date in mm-dd-yyyy"
-	//% shim=gatorRTC::getDate
+	//% shim=gatorRTC::getDateWorld
 	//% advanced=true
-	export function getDate(): string{
+	export function getDateWorld(): string{
 		return "21-05-1995"
 	}
 	
