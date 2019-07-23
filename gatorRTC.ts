@@ -98,16 +98,6 @@ namespace gatorRTC {
 		return
 	}
 	
-	//% shim=gatorRTC::update
-	function update(){
-		
-	}
-	
-	//% shim=gatorRTC::getTimeComponentNoUpdate
-	function getTimeComponentNoUpdate(timeComponent: TimeType){
-		
-	}
-	
 	/**
 	* Get RTC time in HH:MM:SS format
 	*/
@@ -116,7 +106,7 @@ namespace gatorRTC {
 	//% block="time in HH:MM:SS"
 	export function getTime(): string{
 		update()
-		let timeString: string = getTimeComponentNoUpdate(TimeType.Hours) + ":" + getTimeComponentNoUpdate(TimeType.Minutes) + ":" + getTimeComponentNoUpdate(TimeType.Seconds)
+		let timeString: string = getTimeComponent(TimeType.Hours) + ":" + getTimeComponent(TimeType.Minutes) + ":" + getTimeComponentNoUpdate(TimeType.Seconds)
 		return timeString
 	}
 	
@@ -165,5 +155,15 @@ namespace gatorRTC {
 	//% advanced=true
 	export function getTimeComponent(timeComponent: TimeType): number{
 		return 0
+	}
+	
+	//% shim=gatorRTC::update
+	function update(){
+		
+	}
+	
+	//% shim=gatorRTC::getTimeComponentNoUpdate
+	function getTimeComponentNoUpdate(timeComponent: TimeType){
+		
 	}
 }
