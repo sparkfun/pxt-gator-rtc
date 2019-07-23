@@ -106,7 +106,7 @@ namespace gatorRTC {
 	//% block="time in HH:MM:SS"
 	export function getTime(): string{
 		update()
-		let timeString: string = getTimeComponent(TimeType.Hours) + ":" + getTimeComponent(TimeType.Minutes) + ":" + getTimeComponent(TimeType.Seconds)
+		let timeString: string = String(getTimeComponent(TimeType.Hours)) + ":" + String(getTimeComponent(TimeType.Minutes)) + ":" + String(getTimeComponent(TimeType.Seconds))
 		return timeString
 	}
 	
