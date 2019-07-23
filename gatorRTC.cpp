@@ -117,7 +117,7 @@ namespace gatorRTC {
 	}
 	
 	//%
-	void update()
+	void updateRTC()
 	{
 		rtc->updateTime();
 	}
