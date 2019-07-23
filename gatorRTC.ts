@@ -159,11 +159,6 @@ namespace gatorRTC {
 	
 	//% shim=gatorRTC::update
 	function update(){
-		
-	}
-	
-	//% shim=gatorRTC::getTimeComponentNoUpdate
-	function getTimeComponentNoUpdate(timeComponent: TimeType){
-		
+		return 0
 	}
 }
