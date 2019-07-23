@@ -1,6 +1,6 @@
 {
     "name": "gatorRTC",
-    "version": "0.0.21",
+    "version": "0.0.22",
     "description": "SparkFun gator:RTC",
     "license": "MIT",
     "dependencies": {
