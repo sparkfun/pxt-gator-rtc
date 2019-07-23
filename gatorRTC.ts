@@ -161,8 +161,8 @@ namespace gatorRTC {
 	* Get's one component of the time on the RTC. Select which component you would like to get from the drop down.
 	*/
 	//% weight=41
-	//% blockId="gatorRTC_getTimeComponent"
-	//% block="value of %timeComponent"
+	//% blockId="gatorRTC_updateRTC"
+	//% block="Update RTC"
 	//% shim=gatorRTC::updateRTC
 	//% advanced=true
 	function updateRTC(){
