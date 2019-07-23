@@ -46,6 +46,18 @@ namespace gatorRTC {
 	}
 	
 	//%
+	bool is12HourMode()
+	{
+		return rtc->is12Hour();
+	}
+	
+	//%
+	bool isAfternoon()
+	{
+		return rtc->isPM();
+	}
+	
+	//%
 	void setDate(uint8_t month, uint8_t day, uint8_t year)
 	{
 		rtc->setMonth(month);	

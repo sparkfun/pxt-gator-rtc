@@ -105,7 +105,28 @@ namespace gatorRTC {
 	//% blockId="gatorRTC_getTime"
 	//% block="time in HH:MM:SS"
 	export function getTime(): string{
-		let timeString: string = getTimeComponent(TimeType.Hours) + ":" + getTimeComponent(TimeType.Minutes) + ":" + getTimeComponent(TimeType.Seconds)
+		let minutes = getTimeComponent(TimeType.Minutes)
+		let seconds = getTimeComponent(TimeType.Seconds)
+		let minuteDelimiterString: string = ":"
+		let secondDelimiterString: string = ":"
+		let ampmString: string = ""
+		if (minutes < 10)
+		{
+			minuteDelimiterString = ":0"
+		}
+		if (seconds < 10)
+		{
+			secondDelimiterString = ":0"
+		}
+		if (is12HourMode())
+		{
+			ampmString = "AM"
+			if (isAfternoon())
+			{
+				ampmString = "PM"
+			}
+		}
+		let timeString: string = getTimeComponent(TimeType.Hours) + minuteDelimiterString + getTimeComponent(TimeType.Minutes) + secondDelimiterString + getTimeComponent(TimeType.Seconds)
 		return timeString
 	}
 	
@@ -154,5 +175,17 @@ namespace gatorRTC {
 	//% advanced=true
 	export function getTimeComponent(timeComponent: TimeType): number{
 		return 0
+	}
+	
+	//% shim=gatorRTC::is12HourMode
+	function is12HourMode(): boolean
+	{
+		return false
+	}
+	
+	//% shim=gatorRTC::isAfternoon
+	function isAfternoon(): boolean
+	{
+		return false
 	}
 }
