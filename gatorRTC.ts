@@ -165,7 +165,7 @@ namespace gatorRTC {
 	//% block="Update RTC"
 	//% shim=gatorRTC::updateRTC
 	//% advanced=true
-	function updateRTC(){
+	export function updateRTC(){
 		return 0
 	}
 }
