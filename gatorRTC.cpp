@@ -85,6 +85,7 @@ namespace gatorRTC {
 	//%
 	uint16_t getTimeComponent(uint8_t timeComponent)
 	{
+		rtc->updateTime();
 		uint16_t returnValue;
 		switch (timeComponent)
 		{
@@ -114,12 +115,6 @@ namespace gatorRTC {
 				break;
 		}
 		return returnValue;
-	}
-	
-	//%
-	void updateRTC()
-	{
-		rtc->updateTime();
 	}
 	
 	//%

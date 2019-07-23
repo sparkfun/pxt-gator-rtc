@@ -105,7 +105,6 @@ namespace gatorRTC {
 	//% blockId="gatorRTC_getTime"
 	//% block="time in HH:MM:SS"
 	export function getTime(): string{
-		updateRTC()
 		let timeString: string = getTimeComponent(TimeType.Hours) + ":" + getTimeComponent(TimeType.Minutes) + ":" + getTimeComponent(TimeType.Seconds)
 		return timeString
 	}
@@ -154,18 +153,6 @@ namespace gatorRTC {
 	//% shim=gatorRTC::getTimeComponent
 	//% advanced=true
 	export function getTimeComponent(timeComponent: TimeType): number{
-		return 0
-	}
-	
-	/**
-	* Get's one component of the time on the RTC. Select which component you would like to get from the drop down.
-	*/
-	//% weight=41
-	//% blockId="gatorRTC_updateRTC"
-	//% block="Update RTC"
-	//% shim=gatorRTC::updateRTC
-	//% advanced=true
-	export function updateRTC(){
 		return 0
 	}
 }
