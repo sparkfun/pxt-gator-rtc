@@ -83,7 +83,7 @@ namespace gatorRTC {
 	}
 	
 	//%
-	uint16_t getTimeComponent(uint8_t timeComponent, bool updateTime)
+	uint16_t getTimeComponent(uint8_t timeComponent)
 	{
 		rtc->updateTime();
 		uint16_t returnValue;
@@ -118,12 +118,50 @@ namespace gatorRTC {
 	}
 	
 	//%
+	uint16_t getTimeComponentNoUpdate(uint8_t timeComponent)
+	{
+		uint16_t returnValue;
+		switch (timeComponent)
+		{
+			case 1:
+				returnValue = rtc->getSeconds();
+				break;
+			case 2:
+				returnValue = rtc->getMinutes();
+				break;
+			case 3:
+				returnValue = rtc->getHours();
+				break;
+			case 4:
+				returnValue = rtc->getDate();
+				break;
+			case 5:
+				returnValue = rtc->getMonth();
+				break;
+			case 6:
+				returnValue = rtc->getYear();
+				break;
+			case 7:
+				returnValue = rtc->getWeekday();
+				break;
+			default:
+				returnValue = 0;
+				break;
+		}
+		return returnValue;
+	}
+	
+	//%
+	void update()
+	{
+		rtc->updateTime();
+	}
+	
+	//%
 	String getDateUSA()
 	{
 		rtc->updateTime();
-		static char date[11]; //Max of mm/dd/yyyy with \0 terminator
-		sprintf(date, "%02d/%02d/20%02d", rtc->getMonth(), rtc->getDate(), rtc->getYear());
-		return (String)date;
+		return (String)rtc->stringDateUSA();
 	}
 	
 	//%
@@ -131,13 +169,6 @@ namespace gatorRTC {
 	{
 		rtc->updateTime();
 		return (String)rtc->stringDate();
-	}
-	
-	//%
-	String getTime()
-	{
-		rtc->updateTime();
-		return (String)rtc->stringTime();
 	}
 	
 	//%
