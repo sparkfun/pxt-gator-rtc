@@ -58,6 +58,9 @@ namespace gatorRTC {
 	//% weight=49
 	//% blockId="gatorRTC_set12Time"
 	//% block="set time to %hours :%minutes :%seconds -%amPm"
+	//% hours.min=0 hours.max=12
+	//% minutes.min=0 minutes.max=60
+	//% seconds.min=0 seconds.max=60
 	//% shim=gatorRTC::set12Time
 	export function set12Time(hours: number, minutes: number, seconds: number, amPm: Afternoon){
 		return
@@ -69,6 +72,9 @@ namespace gatorRTC {
 	//% weight=48
 	//% blockId="gatorRTC_set24Time"
 	//% block="set time to %hours | : %minutes | : %seconds in 24 hour mode"
+	//% hours.min=0 hours.max=24
+	//% minutes.min=0 minutes.max=60
+	//% seconds.min=0 seconds.max=60
 	//% shim=gatorRTC::set24Time
 	//% advanced=true
 	export function set24Time(hours: number, minutes: number, seconds: number){
@@ -81,6 +87,8 @@ namespace gatorRTC {
 	//% weight=48
 	//% blockId="gatorRTC_setDate"
 	//% block="set date to %month |-%day |-%year"
+	//% day.min=0 day.max=31
+	//% year.min=2019 
 	//% shim=gatorRTC::setDate
 	export function setDate(month: Months, day: number, year: number){
 		return
