@@ -40,8 +40,12 @@ Distributed as-is; no warranty is given.
 #define CTRL1_STOP	7
 #define CTRL1_PSWB	5
 #define CTRL1_ARST						1 << 2 //Enables reset of interrupt flags in status register 
-\
+
+#define CTRL2_TSE						7		//Time stamp enable bit
 #define CTRL2_12_24	1
+
+#define EVENT_CTRL_ET					4	//Event filtering time setting
+#define EVENT_CTRL_TSOW					1	//Time stamp overwrite, 0 here means first event stays in timestamp until reset. 1 means last event will overwrite TS registers
 
 //Bits in Hours register
 #define HOURS_AM_PM						5
@@ -146,12 +150,10 @@ class RV3028
 	bool setMonth(uint8_t value);
 	bool setYear(uint8_t value);
 	
-	void updateTime(); //Update the local array with the RTC registers
+	void initializeTimestamping();
 	
-	char* stringDateUSA(); //Return date in mm-dd-yyyy
-	char* stringDate(); //Return date in dd-mm-yyyy
-	char* stringTime(); //Return time hh:mm:ss with AM/PM if in 12 hour mode
-	char* stringTimeStamp(); //Return timeStamp in ISO 8601 format yyyy-mm-ddThh:mm:ss
+	void updateTime(); //Update the local array with the RTC registers
+	bool updateTimestamp(); //Update the local array with the RTC registers
 	
 	uint8_t getSeconds();
 	uint8_t getMinutes();
@@ -159,7 +161,15 @@ class RV3028
 	uint8_t getDate();
 	uint8_t getWeekday();
 	uint8_t getMonth();
-	uint8_t getYear();	
+	uint8_t getYear();
+	
+	uint8_t getSecondsTimestamp();
+	uint8_t getMinutesTimestamp();
+	uint8_t getHoursTimestamp();
+	uint8_t getDateTimestamp();
+	uint8_t getWeekdayTimestamp();
+	uint8_t getMonthTimestamp();
+	uint8_t getYearTimestamp();	
 	
 	bool is12Hour(); //Returns true if 12hour bit is set
 	bool isPM(); //Returns true if is12Hour and PM bit is set
@@ -178,4 +188,9 @@ class RV3028
     void writeRegister(uint8_t addr, uint8_t val);
 	void readMultipleRegisters(uint8_t addr, uint8_t * dest, uint8_t len);
 	void writeMultipleRegisters(uint8_t addr, uint8_t * values, uint8_t len);
+	
+	private:
+	uint8_t _tsCount = 0;
+	uint8_t _previousTsCount = 0;
+	bool _timestampInitialized = false;
 };

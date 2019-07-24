@@ -46,6 +46,18 @@ namespace gatorRTC {
 	}
 	
 	//%
+	void set12HourMode()
+	{
+		rtc->set12Hour();
+	}
+	
+	//%
+	void set24HourMode()
+	{
+		rtc->set24Hour();
+	}
+	
+	//%
 	bool is12HourMode()
 	{
 		return rtc->is12Hour();
@@ -95,58 +107,43 @@ namespace gatorRTC {
 	}
 	
 	//%
-	uint16_t getTimeComponent(uint8_t timeComponent)
+	uint16_t getTimestampComponent(uint8_t timeComponent)
 	{
-		rtc->updateTime();
-		uint16_t returnValue;
-		switch (timeComponent)
+		if (rtc->updateTimestamp())
 		{
-			case 1:
-				returnValue = rtc->getSeconds();
-				break;
-			case 2:
-				returnValue = rtc->getMinutes();
-				break;
-			case 3:
-				returnValue = rtc->getHours();
-				break;
-			case 4:
-				returnValue = rtc->getDate();
-				break;
-			case 5:
-				returnValue = rtc->getMonth();
-				break;
-			case 6:
-				returnValue = rtc->getYear();
-				break;
-			case 7:
-				returnValue = rtc->getWeekday();
-				break;
-			default:
-				returnValue = 0;
-				break;
+			uint16_t returnValue;
+			switch (timeComponent)
+			{
+				case 1:
+					returnValue = rtc->getSeconds();
+					break;
+				case 2:
+					returnValue = rtc->getMinutes();
+					break;
+				case 3:
+					returnValue = rtc->getHours();
+					break;
+				case 4:
+					returnValue = rtc->getDate();
+					break;
+				case 5:
+					returnValue = rtc->getMonth();
+					break;
+				case 6:
+					returnValue = rtc->getYear();
+					break;
+				case 7:
+					returnValue = rtc->getWeekday();
+					break;
+				default:
+					returnValue = 0;
+					break;
+			}
+			return returnValue;
 		}
-		return returnValue;
-	}
-	
-	//%
-	String getDateUSA()
-	{
-		rtc->updateTime();
-		return (String)rtc->stringDateUSA();
-	}
-	
-	//%
-	String getDateWorld()
-	{
-		rtc->updateTime();
-		return (String)rtc->stringDate();
-	}
-	
-	//%
-	String getTimeStamp()
-	{
-		rtc->updateTime();
-		return (String)rtc->stringTimeStamp();
+		else
+		{
+			return 0;
+		}
 	}
 }

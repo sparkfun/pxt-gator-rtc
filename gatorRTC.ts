@@ -120,26 +120,38 @@ namespace gatorRTC {
 		}
 		if (is12HourMode())
 		{
-			ampmString = "AM"
+			ampmString = " AM"
 			if (isAfternoon())
 			{
-				ampmString = "PM"
+				ampmString = " PM"
 			}
 		}
-		let timeString: string = getTimeComponent(TimeType.Hours) + minuteDelimiterString + getTimeComponent(TimeType.Minutes) + secondDelimiterString + getTimeComponent(TimeType.Seconds)
+		let timeString: string = getTimeComponent(TimeType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds + ampmString
 		return timeString
 	}
 	
 	/**
-	* Get RTC Timestamp in yyyy-mm-ddThh:mm:ss format. This is the ISO8601 standard timestamp format.
+	* Get RTC Time in yyyy-mm-ddThh:mm:ss format. This is the ISO8601 standard timestamp format.
 	*/
 	//% weight=45
-	//% blockId="gatorRTC_getTimeStamp"
-	//% block="timestamp in yyyy-mm-ddThh:mm:ss"
-	//% shim=gatorRTC::getTimeStamp
+	//% blockId="gatorRTC_get8601Time"
+	//% block="time in yyyy-mm-ddThh:mm:ss"
 	//% advanced=true
-	export function getTimeStamp(): string{
-		return "1995-05-2110:10:10"
+	export function get8601Time(): string{
+		let minutes = getTimeComponent(TimeType.Minutes)
+		let seconds = getTimeComponent(TimeType.Seconds)
+		let minuteDelimiterString: string = ":"
+		let secondDelimiterString: string = ":"
+		if (minutes < 10)
+		{
+			minuteDelimiterString = ":0"
+		}
+		if (seconds < 10)
+		{
+			secondDelimiterString = ":0"
+		}
+		let timeString: string = getTimeComponent(TimeType.Year) + "-" + getTimeComponent(TimeType.Month) + "-" + getTimeComponent(TimeType.Date) + "T" + getTimeComponent(TimeType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds
+		return timeString
 	}
 	
 	/**
@@ -148,9 +160,9 @@ namespace gatorRTC {
 	//% weight=44
 	//% blockId="gatorRTC_getDateUSA"
 	//% block="date in mm-dd-yyyy"
-	//% shim=gatorRTC::getDateUSA
 	export function getDateUSA(): string{
-		return "05-21-1995"
+		let timeString: string = getTimeComponent(TimeType.Month) + "-" + getTimeComponent(TimeType.Date) + "-" + getTimeComponent(TimeType.Year)
+		return timeString
 	}
 	
 	/**
@@ -158,11 +170,11 @@ namespace gatorRTC {
 	*/
 	//% weight=43
 	//% blockId="gatorRTC_getDateWorld"
-	//% block="date in mm-dd-yyyy"
-	//% shim=gatorRTC::getDateWorld
+	//% block="date in dd-mm-yyyy"
 	//% advanced=true
 	export function getDateWorld(): string{
-		return "21-05-1995"
+		let timeString: string = getTimeComponent(TimeType.Date) + "-" + getTimeComponent(TimeType.Month) + "-" + getTimeComponent(TimeType.Year)
+		return timeString
 	}
 	
 	/**
@@ -177,6 +189,97 @@ namespace gatorRTC {
 		return 0
 	}
 	
+	/**
+	* Get RTC timestamp from button press in HH:MM:SS format
+	*/
+	//% weight=41
+	//% blockId="gatorRTC_getTimestamp"
+	//% block="button timestamp in HH:MM:SS"
+	export function getTimestamp(): string{
+		let minutes = getTimestampComponent(TimeType.Minutes)
+		let seconds = getTimestampComponent(TimeType.Seconds)
+		let minuteDelimiterString: string = ":"
+		let secondDelimiterString: string = ":"
+		let ampmString: string = ""
+		if (minutes < 10)
+		{
+			minuteDelimiterString = ":0"
+		}
+		if (seconds < 10)
+		{
+			secondDelimiterString = ":0"
+		}
+		if (is12HourMode())
+		{
+			ampmString = " AM"
+			if (isAfternoon())
+			{
+				ampmString = " PM"
+			}
+		}
+		let timeString: string = getTimestampComponent(TimeType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds + ampmString
+		return timeString
+	}
+	
+	/**
+	* Get RTC button timestamp in yyyy-mm-ddThh:mm:ss format. This is the ISO8601 standard timestamp format.
+	*/
+	//% weight=40
+	//% blockId="gatorRTC_get8601Timestamp"
+	//% block="button timestamp in yyyy-mm-ddThh:mm:ss"
+	//% advanced=true
+	export function get8601Timestamp(): string{
+		let minutes = getTimestampComponent(TimeType.Minutes)
+		let seconds = getTimestampComponent(TimeType.Seconds)
+		let minuteDelimiterString: string = ":"
+		let secondDelimiterString: string = ":"
+		if (minutes < 10)
+		{
+			minuteDelimiterString = ":0"
+		}
+		if (seconds < 10)
+		{
+			secondDelimiterString = ":0"
+		}
+		let timeString: string = getTimestampComponent(TimeType.Year) + "-" + getTimestampComponent(TimeType.Month) + "-" + getTimestampComponent(TimeType.Date) + "T" + getTimestampComponent(TimeType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds
+		return timeString
+	}
+	
+	/**
+	* Get RTC button timestamp date in mm-dd-yyyy
+	*/
+	//% weight=39
+	//% blockId="gatorRTC_getDateUSATimestamp"
+	//% block="button timestamp date in mm-dd-yyyy from most recent timestamp"
+	export function getDateUSATimestamp(): string{
+		let timeString: string = getTimestampComponent(TimeType.Month) + "-" + getTimestampComponent(TimeType.Date) + "-" + getTimestampComponent(TimeType.Year)
+		return timeString
+	}
+	
+	/**
+	* Get RTC button timestamp date in dd-mm-yyyy
+	*/
+	//% weight=38
+	//% blockId="gatorRTC_getDateWorldTimestamp"
+	//% block="button timestamp date in dd-mm-yyyy"
+	//% advanced=true
+	export function getDateWorldTimestamp(): string{
+		let timeString: string = getTimestampComponent(TimeType.Date) + "-" + getTimestampComponent(TimeType.Month) + "-" + getTimestampComponent(TimeType.Year)
+		return timeString
+	}
+	
+	/**
+	* Get's one component of the most recent button timestamp on the RTC. Select which component you would like to get from the drop down.
+	*/
+	//% weight=37
+	//% blockId="gatorRTC_getTimestampComponent"
+	//% block="value of button timestamp %timeComponent"
+	//% shim=gatorRTC::getTimestampComponent
+	//% advanced=true
+	export function getTimestampComponent(timeComponent: TimeType): number{
+		return 0
+	}
+	
 	//% shim=gatorRTC::is12HourMode
 	function is12HourMode(): boolean
 	{
@@ -185,6 +288,12 @@ namespace gatorRTC {
 	
 	//% shim=gatorRTC::isAfternoon
 	function isAfternoon(): boolean
+	{
+		return false
+	}
+	
+	//% shim=gatorRTC::initializeTimestamp
+	function initializeTimestamp()
 	{
 		return false
 	}

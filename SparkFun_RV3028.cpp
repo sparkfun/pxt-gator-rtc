@@ -36,6 +36,7 @@ enum time_order {
 };
 
 uint8_t _time[TIME_ARRAY_LENGTH];
+uint8_t _timestamp[TIME_ARRAY_LENGTH];
 
 //Configure RTC to output 1-12 hours
 //Converts any current hour setting to 12 hour
@@ -129,50 +130,6 @@ uint8_t RV3028::status(void)
 	return(readRegister(RV3028_STATUS));
 }
 
-//Returns a pointer to array of chars that are the date in mm/dd/yyyy format because we're weird
-char* RV3028::stringDateUSA()
-{
-	static char date[11]; //Max of mm/dd/yyyy with \0 terminator
-	sprintf(date, "%02d/%02d/20%02d", BCDtoDEC(_time[TIME_MONTH]), BCDtoDEC(_time[TIME_DATE]), BCDtoDEC(_time[TIME_YEAR]));
-	return(date);
-}
-
-//Returns a pointer to array of chars that are the date in dd/mm/yyyy format
-char*  RV3028::stringDate()
-{
-	static char date[11]; //Max of dd/mm/yyyy with \0 terminator
-	sprintf(date, "%02d/%02d/20%02d", BCDtoDEC(_time[TIME_DATE]), BCDtoDEC(_time[TIME_MONTH]), BCDtoDEC(_time[TIME_YEAR]));
-	return(date);
-}
-
-//Returns a pointer to array of chars that represents the time in hh:mm:ss format
-//Adds AM/PM if in 12 hour mode
-char* RV3028::stringTime()
-{
-	static char time[11]; //Max of hh:mm:ssXM with \0 terminator
-
-	if(is12Hour() == true)
-	{
-		char half = 'A';
-		if(isPM()) half = 'P';
-		
-		sprintf(time, "%02d:%02d:%02d%cM", BCDtoDEC(_time[TIME_HOURS]), BCDtoDEC(_time[TIME_MINUTES]), BCDtoDEC(_time[TIME_SECONDS]), half);
-	}
-	else
-	sprintf(time, "%02d:%02d:%02d", BCDtoDEC(_time[TIME_HOURS]), BCDtoDEC(_time[TIME_MINUTES]), BCDtoDEC(_time[TIME_SECONDS]));
-	
-	return(time);
-}
-
-char* RV3028::stringTimeStamp()
-{
-	static char timeStamp[21]; //Max of yyyy-mm-ddThh:mm:ss with \0 terminator
-
-	sprintf(timeStamp, "20%02d-%02d-%02dT%02d:%02d:%02d", BCDtoDEC(_time[TIME_YEAR]), BCDtoDEC(_time[TIME_MONTH]), BCDtoDEC(_time[TIME_DATE]), BCDtoDEC(_time[TIME_HOURS]), BCDtoDEC(_time[TIME_MINUTES]), BCDtoDEC(_time[TIME_SECONDS]));
-	
-	return(timeStamp);
-}
-
 bool RV3028::setTime(uint8_t sec, uint8_t min, uint8_t hour, uint8_t date, uint8_t month, uint8_t year, uint8_t day)
 {
 	_time[TIME_SECONDS] = DECtoBCD(sec);
@@ -238,6 +195,21 @@ bool RV3028::setWeekday(uint8_t value)
 	return setTime(_time, TIME_ARRAY_LENGTH);
 }
 
+void RV3028::initializeTimestamping()
+{
+	if (_timestampInitialized == false)
+	{
+		uint8_t setting = readRegister(RV3028_CTRL2);
+		setting |= (1<<CTRL2_TSE); //Set timestamp to trigger on button
+		writeRegister(RV3028_CTRL2, setting);
+		setting = readRegister(RV3028_EVENT_CTRL);
+		setting |= (0b01<<EVENT_CTRL_ET); //Set read of EVI pin to a 3.9 ms sampling period to debounce the switch
+		setting |= (1<<EVENT_CTRL_TSOW); //Set TSOW so that we overwrite the TS register with each new button press
+		writeRegister(RV3028_EVENT_CTRL, setting);
+		_timestampInitialized = true;
+	}
+}
+
 //Move the hours, mins, sec, etc registers from RV-3028 into the _time array
 //Needs to be called before printing time or date
 //We do not protect the GPx registers. They will be overwritten. The user has plenty of RAM if they need it.
@@ -246,6 +218,21 @@ void RV3028::updateTime()
 	readMultipleRegisters(RV3028_SECONDS, _time, TIME_ARRAY_LENGTH);
 	
 	if(is12Hour()) _time[TIME_HOURS] &= ~(1<<HOURS_AM_PM); //Remove this bit from value
+}
+
+bool RV3028::updateTimestamp()
+{
+	initializeTimestamping();
+	bool newStamp = false;
+	_tsCount = readRegister(RV3028_COUNT_TS);
+	if (_tsCount != _previousTsCount)
+	{
+		newStamp = true;
+		readMultipleRegisters(RV3028_SECONDS_TS, _timestamp, TIME_ARRAY_LENGTH);
+		if(is12Hour()) _timestamp[TIME_HOURS] &= ~(1<<HOURS_AM_PM); //Remove this bit from value
+	}
+	_previousTsCount = _tsCount;
+	return newStamp;
 }
 
 uint8_t RV3028::getSeconds()
@@ -281,6 +268,41 @@ uint8_t RV3028::getYear()
 uint8_t RV3028::getWeekday()
 {
 	return BCDtoDEC(_time[TIME_DAY]);
+}
+
+uint8_t RV3028::getSecondsTimestamp()
+{
+	return BCDtoDEC(_timestamp[TIME_SECONDS]);
+}
+
+uint8_t RV3028::getMinutesTimestamp()
+{
+	return BCDtoDEC(_timestamp[TIME_MINUTES]);
+}
+
+uint8_t RV3028::getHoursTimestamp()
+{
+	return BCDtoDEC(_timestamp[TIME_HOURS]);
+}
+
+uint8_t RV3028::getDateTimestamp()
+{
+	return BCDtoDEC(_timestamp[TIME_DATE]);
+}
+
+uint8_t RV3028::getMonthTimestamp()
+{
+	return BCDtoDEC(_timestamp[TIME_MONTH]);
+}
+
+uint8_t RV3028::getYearTimestamp()
+{
+	return BCDtoDEC(_timestamp[TIME_YEAR]);
+}
+
+uint8_t RV3028::getWeekdayTimestamp()
+{
+	return BCDtoDEC(_timestamp[TIME_DAY]);
 }
 
 uint8_t RV3028::BCDtoDEC(uint8_t val)
