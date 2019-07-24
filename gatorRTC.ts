@@ -47,7 +47,7 @@
  }
 
 //% color=#f44242 
-//% icon="\uf0ce"
+//% icon="\uf017"
 namespace gatorRTC {
 	// Functions for reading and setting time on the gator:RTC
 
@@ -93,15 +93,25 @@ namespace gatorRTC {
 	//% blockId="gatorRTC_setTimeComponent"
 	//% block="set %timeComponent | to %value"
 	//% shim=gatorRTC::setTimeComponent
-	//% advanced=true
 	export function setTimeComponent(timeComponent: TimeType, value: number){
 		return
 	}
 	
 	/**
-	* Get RTC time in HH:MM:SS format
+	* Get's one component of the time on the RTC. Select which component you would like to get from the drop down.
 	*/
 	//% weight=46
+	//% blockId="gatorRTC_getTimeComponent"
+	//% block="value of %timeComponent"
+	//% shim=gatorRTC::getTimeComponent
+	export function getTimeComponent(timeComponent: TimeType): number{
+		return 0
+	}
+	
+	/**
+	* Get RTC time in HH:MM:SS format
+	*/
+	//% weight=45
 	//% blockId="gatorRTC_getTime"
 	//% block="time in HH:MM:SS"
 	export function getTime(): string{
@@ -133,7 +143,7 @@ namespace gatorRTC {
 	/**
 	* Get RTC Time in yyyy-mm-ddThh:mm:ss format. This is the ISO8601 standard timestamp format.
 	*/
-	//% weight=45
+	//% weight=44
 	//% blockId="gatorRTC_get8601Time"
 	//% block="time in yyyy-mm-ddThh:mm:ss"
 	//% advanced=true
@@ -175,18 +185,6 @@ namespace gatorRTC {
 	export function getDateWorld(): string{
 		let timeString: string = getTimeComponent(TimeType.Date) + "-" + getTimeComponent(TimeType.Month) + "-" + getTimeComponent(TimeType.Year)
 		return timeString
-	}
-	
-	/**
-	* Get's one component of the time on the RTC. Select which component you would like to get from the drop down.
-	*/
-	//% weight=42
-	//% blockId="gatorRTC_getTimeComponent"
-	//% block="value of %timeComponent"
-	//% shim=gatorRTC::getTimeComponent
-	//% advanced=true
-	export function getTimeComponent(timeComponent: TimeType): number{
-		return 0
 	}
 	
 	/**
@@ -250,7 +248,7 @@ namespace gatorRTC {
 	*/
 	//% weight=39
 	//% blockId="gatorRTC_getDateUSATimestamp"
-	//% block="button timestamp date in mm-dd-yyyy from most recent timestamp"
+	//% block="button timestamp date in mm-dd-yyyy"
 	export function getDateUSATimestamp(): string{
 		let timeString: string = getTimestampComponent(TimeType.Month) + "-" + getTimestampComponent(TimeType.Date) + "-" + getTimestampComponent(TimeType.Year)
 		return timeString
