@@ -107,6 +107,41 @@ namespace gatorRTC {
 	}
 	
 	//%
+	uint16_t getTimeComponent(uint8_t timeComponent)
+	{
+		rtc->updateTime();
+		uint16_t returnValue;
+		switch (timeComponent)
+		{
+			case 1:
+				returnValue = rtc->getSeconds();
+				break;
+			case 2:
+				returnValue = rtc->getMinutes();
+				break;
+			case 3:
+				returnValue = rtc->getHours();
+				break;
+			case 4:
+				returnValue = rtc->getDate();
+				break;
+			case 5:
+				returnValue = rtc->getMonth();
+				break;
+			case 6:
+				returnValue = rtc->getYear();
+				break;
+			case 7:
+				returnValue = rtc->getWeekday();
+				break;
+			default:
+				returnValue = 0;
+				break;
+		}
+		return returnValue;
+	}
+	
+	//%
 	uint16_t getTimestampComponent(uint8_t timeComponent)
 	{
 		if (rtc->updateTimestamp())
@@ -115,25 +150,25 @@ namespace gatorRTC {
 			switch (timeComponent)
 			{
 				case 1:
-					returnValue = rtc->getSeconds();
+					returnValue = rtc->getSecondsTimestamp();
 					break;
 				case 2:
-					returnValue = rtc->getMinutes();
+					returnValue = rtc->getMinutesTimestamp();
 					break;
 				case 3:
-					returnValue = rtc->getHours();
+					returnValue = rtc->getHoursTimestamp();
 					break;
 				case 4:
-					returnValue = rtc->getDate();
+					returnValue = rtc->getDateTimestamp();
 					break;
 				case 5:
-					returnValue = rtc->getMonth();
+					returnValue = rtc->getMonthTimestamp();
 					break;
 				case 6:
-					returnValue = rtc->getYear();
+					returnValue = rtc->getYearTimestamp();
 					break;
 				case 7:
-					returnValue = rtc->getWeekday();
+					returnValue = rtc->getWeekdayTimestamp();
 					break;
 				default:
 					returnValue = 0;
