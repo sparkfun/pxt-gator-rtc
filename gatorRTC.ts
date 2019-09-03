@@ -97,7 +97,7 @@ namespace gatorRTC {
 	//% blockId="gatorRTC_setDate"
 	//% block="set date to %month |-%day |-%year"
 	//% day.min=0 day.max=31
-	//% year.min=2019 
+	//% year.min=0 year.max=99
 	//% shim=gatorRTC::setDate
 	export function setDate(month: Months, day: number, year: number){
 		return
@@ -177,7 +177,7 @@ namespace gatorRTC {
 		{
 			secondDelimiterString = ":0"
 		}
-		let timeString: string = getTimeComponent(TimeType.Year) + "-" + getTimeComponent(TimeType.Month) + "-" + getTimeComponent(TimeType.Date) + "T" + getTimeComponent(TimeType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds
+		let timeString: string = "20" + getTimeComponent(TimeType.Year) + "-" + getTimeComponent(TimeType.Month) + "-" + getTimeComponent(TimeType.Date) + "T" + getTimeComponent(TimeType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds
 		return timeString
 	}
 	
@@ -188,7 +188,7 @@ namespace gatorRTC {
 	//% blockId="gatorRTC_getDateUSA"
 	//% block="date in mm-dd-yyyy"
 	export function getDateUSA(): string{
-		let timeString: string = getTimeComponent(TimeType.Month) + "-" + getTimeComponent(TimeType.Date) + "-" + getTimeComponent(TimeType.Year)
+		let timeString: string = getTimeComponent(TimeType.Month) + "-" + getTimeComponent(TimeType.Date) + "-" + "20" + getTimeComponent(TimeType.Year)
 		return timeString
 	}
 	
@@ -200,7 +200,7 @@ namespace gatorRTC {
 	//% block="date in dd-mm-yyyy"
 	//% advanced=true
 	export function getDateWorld(): string{
-		let timeString: string = getTimeComponent(TimeType.Date) + "-" + getTimeComponent(TimeType.Month) + "-" + getTimeComponent(TimeType.Year)
+		let timeString: string = getTimeComponent(TimeType.Date) + "-" + getTimeComponent(TimeType.Month) + "-" + "20" + getTimeComponent(TimeType.Year)
 		return timeString
 	}
 	
@@ -256,7 +256,7 @@ namespace gatorRTC {
 		{
 			secondDelimiterString = ":0"
 		}
-		let timeString: string = getTimestampComponent(TimeStampType.Year) + "-" + getTimestampComponent(TimeStampType.Month) + "-" + getTimestampComponent(TimeStampType.Date) + "T" + getTimestampComponent(TimeStampType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds
+		let timeString: string = "20" + getTimestampComponent(TimeStampType.Year) + "-" + getTimestampComponent(TimeStampType.Month) + "-" + getTimestampComponent(TimeStampType.Date) + "T" + getTimestampComponent(TimeStampType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds
 		return timeString
 	}
 	
@@ -267,7 +267,7 @@ namespace gatorRTC {
 	//% blockId="gatorRTC_getDateUSATimestamp"
 	//% block="button timestamp date in mm-dd-yyyy"
 	export function getDateUSATimestamp(): string{
-		let timeString: string = getTimestampComponent(TimeStampType.Month) + "-" + getTimestampComponent(TimeStampType.Date) + "-" + getTimestampComponent(TimeStampType.Year)
+		let timeString: string = getTimestampComponent(TimeStampType.Month) + "-" + getTimestampComponent(TimeStampType.Date) + "-" + "20" + getTimestampComponent(TimeStampType.Year)
 		return timeString
 	}
 	
@@ -279,7 +279,7 @@ namespace gatorRTC {
 	//% block="button timestamp date in dd-mm-yyyy"
 	//% advanced=true
 	export function getDateWorldTimestamp(): string{
-		let timeString: string = getTimestampComponent(TimeStampType.Date) + "-" + getTimestampComponent(TimeStampType.Month) + "-" + getTimestampComponent(TimeStampType.Year)
+		let timeString: string = getTimestampComponent(TimeStampType.Date) + "-" + getTimestampComponent(TimeStampType.Month) + "-" + "20" + getTimestampComponent(TimeStampType.Year)
 		return timeString
 	}
 	
