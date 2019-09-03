@@ -167,7 +167,6 @@ class RV3028
 	uint8_t getMinutesTimestamp();
 	uint8_t getHoursTimestamp();
 	uint8_t getDateTimestamp();
-	uint8_t getWeekdayTimestamp();
 	uint8_t getMonthTimestamp();
 	uint8_t getYearTimestamp();	
 	

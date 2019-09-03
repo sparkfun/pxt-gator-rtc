@@ -21,7 +21,8 @@ Distributed as-is; no warranty is given.
 #include "MicroBit.h"
 #endif
 
-#define TIME_ARRAY_LENGTH 7 // Total number of writable values in device
+#define TIME_ARRAY_LENGTH 7
+#define TIMESTAMP_ARRAY_LENGTH 6 // Total number of writable values in device
 
 static MicroBitI2C i2c(I2C_SDA0, I2C_SCL0);
 
@@ -36,7 +37,7 @@ enum time_order {
 };
 
 uint8_t _time[TIME_ARRAY_LENGTH];
-uint8_t _timestamp[TIME_ARRAY_LENGTH];
+uint8_t _timestamp[TIMESTAMP_ARRAY_LENGTH];
 
 //Configure RTC to output 1-12 hours
 //Converts any current hour setting to 12 hour
@@ -228,7 +229,7 @@ bool RV3028::updateTimestamp()
 	if (_tsCount != _previousTsCount)
 	{
 		newStamp = true;
-		readMultipleRegisters(RV3028_SECONDS_TS, _timestamp, TIME_ARRAY_LENGTH);
+		readMultipleRegisters(RV3028_SECONDS_TS, _timestamp, TIMESTAMP_ARRAY_LENGTH);
 		if(is12Hour()) _timestamp[TIME_HOURS] &= ~(1<<HOURS_AM_PM); //Remove this bit from value
 	}
 	_previousTsCount = _tsCount;
@@ -287,22 +288,17 @@ uint8_t RV3028::getHoursTimestamp()
 
 uint8_t RV3028::getDateTimestamp()
 {
-	return BCDtoDEC(_timestamp[TIME_DATE]);
+	return BCDtoDEC(_timestamp[TIME_DATE - 1]); //Subtract one due to lack of weekday register in timestamp
 }
 
 uint8_t RV3028::getMonthTimestamp()
 {
-	return BCDtoDEC(_timestamp[TIME_MONTH]);
+	return BCDtoDEC(_timestamp[TIME_MONTH - 1]); //Subtract one due to lack of weekday register in timestamp
 }
 
 uint8_t RV3028::getYearTimestamp()
 {
-	return BCDtoDEC(_timestamp[TIME_YEAR]);
-}
-
-uint8_t RV3028::getWeekdayTimestamp()
-{
-	return BCDtoDEC(_timestamp[TIME_DAY]);
+	return BCDtoDEC(_timestamp[TIME_YEAR - 1]); //Subtract one due to lack of weekday register in timestamp
 }
 
 uint8_t RV3028::BCDtoDEC(uint8_t val)

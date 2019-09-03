@@ -167,9 +167,6 @@ namespace gatorRTC {
 				case 6:
 					returnValue = rtc->getYearTimestamp();
 					break;
-				case 7:
-					returnValue = rtc->getWeekdayTimestamp();
-					break;
 				default:
 					returnValue = 0;
 					break;
