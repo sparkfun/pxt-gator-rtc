@@ -143,7 +143,7 @@ namespace gatorRTC {
 	* Get's one component of the time on the RTC. Select which component you would like to get from the drop down.
 	*/
 	//% weight=44
-	//% blockId="gatorRTC_getTimeComponent"
+	//% blockId="gatorRTC_getWeekdayName"
 	//% block="text of weekday"
 	//% shim=gatorRTC::getWeekdayName
 	export function getWeekdayName(timeComponent: TimeType): string{
@@ -351,6 +351,7 @@ namespace gatorRTC {
 	//% weight=34
 	//% blockId="gatorgatorRTC_set1224Mode"
 	//% block="set to %timeType| time"
+	//% advanced=true
 	export function set1224Mode(timeType: TimeMode){
 		if(timeType)
 		{
