@@ -42,7 +42,7 @@ Distributed as-is; no warranty is given.
 #define CTRL1_ARST						1 << 2 //Enables reset of interrupt flags in status register 
 
 #define CTRL2_TSE						7		//Time stamp enable bit
-#define CTRL2_12_24	1
+#define CTRL2_12_24						1
 
 #define EVENT_CTRL_ET					4	//Event filtering time setting
 #define EVENT_CTRL_TSOW					1	//Time stamp overwrite, 0 here means first event stays in timestamp until reset. 1 means last event will overwrite TS registers

@@ -304,7 +304,7 @@ namespace gatorRTC {
 	//% shim=gatorRTC::isAfternoon
 	function isAfternoon(): boolean
 	{
-		return false
+		return true
 	}
 	
 	//% shim=gatorRTC::initializeTimestamp
