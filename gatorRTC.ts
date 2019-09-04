@@ -145,7 +145,6 @@ namespace gatorRTC {
 	//% weight=44
 	//% blockId="gatorRTC_getWeekdayName"
 	//% block="text of weekday"
-	//% shim=gatorRTC::getWeekdayName
 	export function getWeekdayName(): string{
 		let dayString: string
 		switch (getTimeComponent(TimeType.Weekday))
@@ -168,7 +167,7 @@ namespace gatorRTC {
 			case 5:
 				dayString = "Saturday"
 				break;
-			case 0:
+			case 6:
 				dayString = "Sunday"
 				break;
 		}
