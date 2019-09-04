@@ -130,7 +130,7 @@ namespace gatorRTC {
 	//% day.min=0 day.max=31
 	//% year.min=0 year.max=99
 	//% shim=gatorRTC::setDate
-	export function setDate(month: Months, day: number, weekday:dayNames, year: number){
+	export function setDate(weekday:dayNames, month: Months, day: number, year: number){
 		return
 	}
 	
