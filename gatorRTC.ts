@@ -127,7 +127,7 @@ namespace gatorRTC {
 	//% weight=48
 	//% blockId="gatorRTC_setDate"
 	//% block="set date to %weekday|, %month |-%day |-20%year"
-	//% day.min=0 day.max=31
+	//% day.min=1 day.max=31
 	//% year.min=0 year.max=99
 	//% shim=gatorRTC::setDate
 	export function setDate(weekday:dayNames, month: Months, day: number, year: number){
@@ -154,6 +154,42 @@ namespace gatorRTC {
 	//% shim=gatorRTC::getTimeComponent
 	export function getTimeComponent(timeComponent: TimeType): number{
 		return 0
+	}
+	
+	/**
+	* Get's one component of the time on the RTC. Select which component you would like to get from the drop down.
+	*/
+	//% weight=46
+	//% blockId="gatorRTC_getTimeComponent"
+	//% block="text of weekday"
+	//% shim=gatorRTC::getWeekdayName
+	export function getWeekdayName(timeComponent: TimeType): string{
+		let dayString: string
+		switch (getTimeComponent(TimeType.Weekday))
+		{
+			case 0:
+				dayString = "Monday"
+				break;
+			case 1:
+				dayString = "Tuesday"
+				break;
+			case 2:
+				dayString = "Wednesday"
+				break;
+			case 3:
+				dayString = "Thursday"
+				break;
+			case 4:
+				dayString = "Friday"
+				break;
+			case 5:
+				dayString = "Saturday"
+				break;
+			case 0:
+				dayString = "Sunday"
+				break;
+		}
+		return dayString
 	}
 	
 	/**
