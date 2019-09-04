@@ -70,8 +70,9 @@ namespace gatorRTC {
 	}
 	
 	//%
-	void setDate(uint8_t month, uint8_t day, uint8_t year)
+	void setDate(uint8_t month, uint8_t day, uint8_t weekday, uint8_t year)
 	{
+		rtc->setWeekday(weekday);
 		rtc->setMonth(month);	
 		rtc->setDate(day);	
 		rtc->setYear(year);	

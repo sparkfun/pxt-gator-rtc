@@ -142,13 +142,13 @@ class RV3028
 
 	bool setTime(uint8_t sec, uint8_t min, uint8_t hour, uint8_t date, uint8_t month, uint8_t year, uint8_t day);
 	bool setTime(uint8_t * time, uint8_t len);
-	bool setSeconds(uint8_t value);
-	bool setMinutes(uint8_t value);
-	bool setHours(uint8_t value);
-	bool setDate(uint8_t value);
-	bool setWeekday(uint8_t value);
-	bool setMonth(uint8_t value);
-	bool setYear(uint8_t value);
+	void setSeconds(uint8_t value);
+	void setMinutes(uint8_t value);
+	void setHours(uint8_t value);
+	void setDate(uint8_t value);
+	void setWeekday(uint8_t value);
+	void setMonth(uint8_t value);
+	void setYear(uint8_t value);
 	
 	void initializeTimestamping();
 	

@@ -69,12 +69,7 @@ bool RV3028::is12Hour()
 //Returns true if RTC has PM bit set and 12Hour bit set
 bool RV3028::isPM()
 {
-	uint8_t hourRegister = readRegister(RV3028_HOURS);
-	if(is12Hour() && (hourRegister & (1<<HOURS_AM_PM)))
-	{		
-		return(true);
-	}
-	return(false);
+	return readRegister(RV3028_HOURS) & (1<<HOURS_AM_PM);
 }
 
 //Returns the status byte. This likely clears the interrupts as well.
@@ -106,47 +101,39 @@ bool RV3028::setTime(uint8_t * time, uint8_t len)
 	writeMultipleRegisters(RV3028_SECONDS, time, len);
 }
 
-bool RV3028::setSeconds(uint8_t value)
+void RV3028::setSeconds(uint8_t value)
 {
-	_time[TIME_SECONDS] = DECtoBCD(value);
-	return setTime(_time, TIME_ARRAY_LENGTH);
+	writeRegister(RV3028_SECONDS, DECtoBCD(value));
 }
 
-bool RV3028::setMinutes(uint8_t value)
+void RV3028::setMinutes(uint8_t value)
 {
-	_time[TIME_MINUTES] = DECtoBCD(value);
-	return setTime(_time, TIME_ARRAY_LENGTH);
+	writeRegister(RV3028_MINUTES, DECtoBCD(value));
 }
 
-bool RV3028::setHours(uint8_t value)
+void RV3028::setHours(uint8_t value)
 {
-	_time[TIME_HOURS] = DECtoBCD(value);
-	return setTime(_time, TIME_ARRAY_LENGTH);
+	writeRegister(RV3028_HOURS, DECtoBCD(value));
 }
 
-bool RV3028::setDate(uint8_t value)
+void RV3028::setDate(uint8_t value)
 {
-	_time[TIME_DATE] = DECtoBCD(value);
-	return setTime(_time, TIME_ARRAY_LENGTH);
+	writeRegister(RV3028_DATE, DECtoBCD(value));
 }
 
-bool RV3028::setMonth(uint8_t value)
+void RV3028::setMonth(uint8_t value)
 {
-	_time[TIME_MONTH] = DECtoBCD(value);
-	return setTime(_time, TIME_ARRAY_LENGTH);
+	writeRegister(RV3028_MONTHS, DECtoBCD(value));
 }
 
-bool RV3028::setYear(uint8_t value)
+void RV3028::setYear(uint8_t value)
 {
-	_time[TIME_YEAR] = DECtoBCD(value);
-	return setTime(_time, TIME_ARRAY_LENGTH);
+	writeRegister(RV3028_YEARS, DECtoBCD(value));
 }
 
-
-bool RV3028::setWeekday(uint8_t value)
+void RV3028::setWeekday(uint8_t value)
 {
-	_time[TIME_DAY] = DECtoBCD(value);
-	return setTime(_time, TIME_ARRAY_LENGTH);
+	writeRegister(RV3028_WEEKDAYS, DECtoBCD(value));
 }
 
 void RV3028::initializeTimestamping()

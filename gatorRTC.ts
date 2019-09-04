@@ -26,6 +26,16 @@
 	Weekday=7
  }
  
+ enum dayNames{
+	Monday=0,
+	Tuesday=1,
+	Wednesday=2,
+	Thursday=3,
+	Friday=4,
+	Saturday=5,
+	Sunday=6
+ }
+ 
  enum TimeStampType{
 	Seconds=1,
 	Minutes=2,
@@ -50,6 +60,11 @@
 	December=12,
  }
  
+ enum TimeMode{
+	 Military=0,
+	 Standard=1
+ }
+ 
  enum Afternoon{
 	AM=0,
 	PM=1
@@ -60,6 +75,22 @@
 namespace gatorRTC {
 	// Functions for reading and setting time on the gator:RTC
 
+	/**
+	* Switch between standard (12 hour) and military (24 hour) time formats
+	*/
+	//% weight=38
+	//% blockId="gatorgatorRTC_set1224Mode"
+	//% block="set to %timeType| time"
+	export function set1224Mode(timeType: TimeMode){
+		if(timeType)
+		{
+			set12HourMode()
+		}
+		else
+		{
+			set24HourMode()
+		}
+	}
 	
 	/**
 	* Set RTC time in HH:MM:SS in 12 hour format format
@@ -95,11 +126,11 @@ namespace gatorRTC {
 	*/
 	//% weight=48
 	//% blockId="gatorRTC_setDate"
-	//% block="set date to %month |-%day |-20%year"
+	//% block="set date to %weekday|, %month |-%day |-20%year"
 	//% day.min=0 day.max=31
 	//% year.min=0 year.max=99
 	//% shim=gatorRTC::setDate
-	export function setDate(month: Months, day: number, year: number){
+	export function setDate(month: Months, day: number, weekday:dayNames, year: number){
 		return
 	}
 	
@@ -293,6 +324,18 @@ namespace gatorRTC {
 	//% advanced=true
 	export function getTimestampComponent(timeComponent: TimeStampType): number{
 		return 0
+	}
+	
+	//% shim=gatorRTC::set12HourMode
+	function set12HourMode()
+	{
+		return
+	}
+	
+	//% shim=gatorRTC::set24HourMode
+	function set24HourMode()
+	{
+		return
 	}
 	
 	//% shim=gatorRTC::is12HourMode
