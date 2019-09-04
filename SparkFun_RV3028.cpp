@@ -43,69 +43,20 @@ uint8_t _timestamp[TIMESTAMP_ARRAY_LENGTH];
 //Converts any current hour setting to 12 hour
 void RV3028::set12Hour()
 {
-	//Do we need to change anything?
-	if(is12Hour() == false)
-	{		
-		uint8_t hour = BCDtoDEC(readRegister(RV3028_HOURS)); //Get the current hour in the RTC
-
-		//Set the 12/24 hour bit
-		uint8_t setting = readRegister(RV3028_CTRL2);
-		setting |= (1<<CTRL2_12_24);
-		writeRegister(RV3028_CTRL2, setting);
-
-		//Take the current hours and convert to 12, complete with AM/PM bit
-		bool pm = false;
-
-		if(hour == 0)
-			hour += 12;
-		else if(hour == 12)
-			pm = true;
-		else if(hour > 12)
-		{
-			hour -= 12;
-			pm = true;
-		}
-		
-		hour = DECtoBCD(hour); //Convert to BCD
-
-		if(pm == true) hour |= (1<<HOURS_AM_PM); //Set AM/PM bit if needed
-
-		writeRegister(RV3028_HOURS, hour); //Record this to hours register
-	}
+	//Set the 12/24 hour bit
+	uint8_t setting = readRegister(RV3028_CTRL2);
+	setting |= (1<<CTRL2_12_24);
+	writeRegister(RV3028_CTRL2, setting);
 }
 
 //Configure RTC to output 0-23 hours
 //Converts any current hour setting to 24 hour
 void RV3028::set24Hour()
 {
-	//Do we need to change anything?
-	if(is12Hour() == true)
-	{		
-		//Not sure what changing the CTRL1 register will do to hour register so let's get a copy
-		uint8_t hour = readRegister(RV3028_HOURS); //Get the current 12 hour formatted time in BCD
-		bool pm = false;
-		if(hour & (1<<HOURS_AM_PM)) //Is the AM/PM bit set?
-		{
-			pm = true;
-			hour &= ~(1<<HOURS_AM_PM); //Clear the bit
-		}
-		
-		//Change to 24 hour mode
-		uint8_t setting = readRegister(RV3028_CTRL2);
-		setting &= ~(1<<CTRL2_12_24); //Clear the 12/24 hr bit
-		writeRegister(RV3028_CTRL2, setting);
-
-		//Given a BCD hour in the 1-12 range, make it 24
-		hour = BCDtoDEC(hour); //Convert core of register to DEC
-		
-		if(pm == true) hour += 12; //2PM becomes 14
-		if(hour == 12) hour = 0; //12AM stays 12, but should really be 0
-		if(hour == 24) hour = 12; //12PM becomes 24, but should really be 12
-
-		hour = DECtoBCD(hour); //Convert to BCD
-
-		writeRegister(RV3028_HOURS, hour); //Record this to hours register
-	}
+	//Change to 24 hour mode
+	uint8_t setting = readRegister(RV3028_CTRL2);
+	setting &= ~(1<<CTRL2_12_24); //Clear the 12/24 hr bit
+	writeRegister(RV3028_CTRL2, setting);
 }
 
 //Returns true if RTC has been configured for 12 hour mode
@@ -120,7 +71,9 @@ bool RV3028::isPM()
 {
 	uint8_t hourRegister = readRegister(RV3028_HOURS);
 	if(is12Hour() && (hourRegister & (1<<HOURS_AM_PM)))
+	{		
 		return(true);
+	}
 	return(false);
 }
 
