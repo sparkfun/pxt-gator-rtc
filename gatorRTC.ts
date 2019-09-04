@@ -146,7 +146,7 @@ namespace gatorRTC {
 	//% blockId="gatorRTC_getWeekdayName"
 	//% block="text of weekday"
 	//% shim=gatorRTC::getWeekdayName
-	export function getWeekdayName(timeComponent: TimeType): string{
+	export function getWeekdayName(): string{
 		let dayString: string
 		switch (getTimeComponent(TimeType.Weekday))
 		{
