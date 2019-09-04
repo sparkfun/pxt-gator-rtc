@@ -74,23 +74,6 @@
 //% icon="\uf017"
 namespace gatorRTC {
 	// Functions for reading and setting time on the gator:RTC
-
-	/**
-	* Switch between standard (12 hour) and military (24 hour) time formats
-	*/
-	//% weight=36
-	//% blockId="gatorgatorRTC_set1224Mode"
-	//% block="set to %timeType| time"
-	export function set1224Mode(timeType: TimeMode){
-		if(timeType)
-		{
-			set12HourMode()
-		}
-		else
-		{
-			set24HourMode()
-		}
-	}
 	
 	/**
 	* Set RTC time in HH:MM:SS in 12 hour format format
@@ -124,7 +107,7 @@ namespace gatorRTC {
 	/**
 	* Set RTC Date in MM-DD-YYYY format
 	*/
-	//% weight=48
+	//% weight=47
 	//% blockId="gatorRTC_setDate"
 	//% block="set date to %weekday|, %month |-%day |-20%year"
 	//% day.min=1 day.max=31
@@ -137,7 +120,7 @@ namespace gatorRTC {
 	/**
 	* Set's one component of the time on the RTC. Select which component you would like to set from the drop down.
 	*/
-	//% weight=47
+	//% weight=46
 	//% blockId="gatorRTC_setTimeComponent"
 	//% block="set %timeComponent | to %value"
 	//% shim=gatorRTC::setTimeComponent
@@ -148,7 +131,7 @@ namespace gatorRTC {
 	/**
 	* Get's one component of the time on the RTC. Select which component you would like to get from the drop down.
 	*/
-	//% weight=46
+	//% weight=45
 	//% blockId="gatorRTC_getTimeComponent"
 	//% block="value of %timeComponent"
 	//% shim=gatorRTC::getTimeComponent
@@ -159,7 +142,7 @@ namespace gatorRTC {
 	/**
 	* Get's one component of the time on the RTC. Select which component you would like to get from the drop down.
 	*/
-	//% weight=45
+	//% weight=44
 	//% blockId="gatorRTC_getTimeComponent"
 	//% block="text of weekday"
 	//% shim=gatorRTC::getWeekdayName
@@ -195,7 +178,7 @@ namespace gatorRTC {
 	/**
 	* Get RTC time in HH:MM:SS format
 	*/
-	//% weight=44
+	//% weight=43
 	//% blockId="gatorRTC_getTime"
 	//% block="time in HH:MM:SS"
 	export function getTime(): string{
@@ -227,7 +210,7 @@ namespace gatorRTC {
 	/**
 	* Get RTC Time in yyyy-mm-ddThh:mm:ss format. This is the ISO8601 standard timestamp format.
 	*/
-	//% weight=43
+	//% weight=42
 	//% blockId="gatorRTC_get8601Time"
 	//% block="time in yyyy-mm-ddThh:mm:ss"
 	//% advanced=true
@@ -251,7 +234,7 @@ namespace gatorRTC {
 	/**
 	* Get RTC date in mm-dd-yyyy
 	*/
-	//% weight=42
+	//% weight=41
 	//% blockId="gatorRTC_getDateUSA"
 	//% block="date in mm-dd-yyyy"
 	export function getDateUSA(): string{
@@ -262,7 +245,7 @@ namespace gatorRTC {
 	/**
 	* Get RTC date in dd-mm-yyyy
 	*/
-	//% weight=41
+	//% weight=40
 	//% blockId="gatorRTC_getDateWorld"
 	//% block="date in dd-mm-yyyy"
 	//% advanced=true
@@ -274,7 +257,7 @@ namespace gatorRTC {
 	/**
 	* Get RTC timestamp from button press in HH:MM:SS format
 	*/
-	//% weight=40
+	//% weight=39
 	//% blockId="gatorRTC_getTimestamp"
 	//% block="button timestamp in HH:MM:SS"
 	export function getTimestamp(): string{
@@ -306,7 +289,7 @@ namespace gatorRTC {
 	/**
 	* Get RTC button timestamp in yyyy-mm-ddThh:mm:ss format. This is the ISO8601 standard timestamp format.
 	*/
-	//% weight=40
+	//% weight=38
 	//% blockId="gatorRTC_get8601Timestamp"
 	//% block="button timestamp in yyyy-mm-ddThh:mm:ss"
 	//% advanced=true
@@ -330,7 +313,7 @@ namespace gatorRTC {
 	/**
 	* Get RTC button timestamp date in mm-dd-yyyy
 	*/
-	//% weight=39
+	//% weight=37
 	//% blockId="gatorRTC_getDateUSATimestamp"
 	//% block="button timestamp date in mm-dd-yyyy"
 	export function getDateUSATimestamp(): string{
@@ -341,7 +324,7 @@ namespace gatorRTC {
 	/**
 	* Get RTC button timestamp date in dd-mm-yyyy
 	*/
-	//% weight=38
+	//% weight=36
 	//% blockId="gatorRTC_getDateWorldTimestamp"
 	//% block="button timestamp date in dd-mm-yyyy"
 	//% advanced=true
@@ -353,13 +336,30 @@ namespace gatorRTC {
 	/**
 	* Get's one component of the most recent button timestamp on the RTC. Select which component you would like to get from the drop down.
 	*/
-	//% weight=37
+	//% weight=35
 	//% blockId="gatorRTC_getTimestampComponent"
 	//% block="value of button timestamp %timeComponent"
 	//% shim=gatorRTC::getTimestampComponent
 	//% advanced=true
 	export function getTimestampComponent(timeComponent: TimeStampType): number{
 		return 0
+	}
+	
+	/**
+	* Switch between standard (12 hour) and military (24 hour) time formats
+	*/
+	//% weight=34
+	//% blockId="gatorgatorRTC_set1224Mode"
+	//% block="set to %timeType| time"
+	export function set1224Mode(timeType: TimeMode){
+		if(timeType)
+		{
+			set12HourMode()
+		}
+		else
+		{
+			set24HourMode()
+		}
 	}
 	
 	//% shim=gatorRTC::set12HourMode
