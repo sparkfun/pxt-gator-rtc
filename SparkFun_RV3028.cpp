@@ -24,7 +24,9 @@ Distributed as-is; no warranty is given.
 #define TIME_ARRAY_LENGTH 7
 #define TIMESTAMP_ARRAY_LENGTH 6 // Total number of writable values in device
 
-static MicroBitI2C i2c(I2C_SDA0, I2C_SCL0);
+#include "pxt.h"
+
+//static MicroBitI2C i2c(I2C_SDA0, I2C_SCL0);
 
 enum time_order {
 	TIME_SECONDS,    // 0
@@ -252,26 +254,49 @@ uint8_t RV3028::DECtoBCD(uint8_t val)
 	return ( ( val / 10 ) * 0x10 ) + ( val % 10 );
 }
 
+
 uint8_t RV3028::readRegister(uint8_t addr)
 {
-	return i2c.readRegister(RV3028_ADDR, addr);
+	uint8_t data;
+	uBit.i2c.readRegister(RV3028_ADDR, addr, &data, 1);
+	return data;
 }
+
+void RV3028::readMultipleRegisters(uint8_t addr, uint8_t * dest, uint8_t len)
+{
+	uBit.i2c.readRegister(RV3028_ADDR, addr, dest, len);
+}
+
+
+
 
 void RV3028::writeRegister(uint8_t addr, uint8_t val)
 {
-	i2c.writeRegister(RV3028_ADDR, addr, val);
+//	uBit.i2c.write(RV3028_ADDR, addr, val);
+	uint8_t length = 1;
+	uint8_t realLength = length + 1;
+#if MICROBIT_CODAL
+	uint8_t temp[realLength];
+#else 
+	char temp[realLength];
+#endif
+	temp[0] = addr;
+	memcpy(&temp[1], &val, length); //tempLong is 4 bytes, we only need 3
+	uBit.i2c.write(RV3028_ADDR, temp, realLength);
+
 }
 
 void RV3028::writeMultipleRegisters(uint8_t addr, uint8_t * values, uint8_t length)
 {
 	uint8_t realLength = length + 1;
+#if MICROBIT_CODAL
+	uint8_t temp[realLength];
+#else 
 	char temp[realLength];
+#endif
 	temp[0] = addr;
 	memcpy(&temp[1], values, length); //tempLong is 4 bytes, we only need 3
-	i2c.write(RV3028_ADDR, temp, realLength);
+	uBit.i2c.write(RV3028_ADDR, temp, realLength);
 }
 
-void RV3028::readMultipleRegisters(uint8_t addr, uint8_t * dest, uint8_t len)
-{
-	i2c.readRegister(RV3028_ADDR, addr, dest, len);
-}
+
