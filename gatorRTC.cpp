@@ -108,7 +108,7 @@ namespace gatorRTC {
 	}
 	
 	//%
-	uint16_t getTimeComponent(uint8_t timeComponent)
+	uint16_t timeComponent(uint8_t timeComponent)
 	{
 		rtc->updateTime();
 		uint16_t returnValue;
@@ -143,7 +143,7 @@ namespace gatorRTC {
 	}
 	
 	//%
-	uint16_t getTimestampComponent(uint8_t timeComponent)
+	uint16_t timestampComponent(uint8_t timeComponent)
 	{
 		if (rtc->updateTimestamp())
 		{

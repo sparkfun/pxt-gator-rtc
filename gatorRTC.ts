@@ -129,13 +129,13 @@ namespace gatorRTC {
 	}
 	
 	/**
-	* Get's one component of the time on the RTC. Select which component you would like to get from the drop down.
+	* Gets one component of the time on the RTC. Select which component you would like to get from the drop down.
 	*/
 	//% weight=45
-	//% blockId="gatorRTC_getTimeComponent"
+	//% blockId="gatorRTC_timeComponent"
 	//% block="value of %timeComponent"
-	//% shim=gatorRTC::getTimeComponent
-	export function getTimeComponent(timeComponent: TimeType): number{
+	//% shim=gatorRTC::timeComponent
+	export function timeComponent(timeComponent: TimeType): number{
 		return 0
 	}
 	
@@ -143,11 +143,11 @@ namespace gatorRTC {
 	* Get's one component of the time on the RTC. Select which component you would like to get from the drop down.
 	*/
 	//% weight=44
-	//% blockId="gatorRTC_getWeekdayName"
+	//% blockId="gatorRTC_weekdayName"
 	//% block="text of weekday"
-	export function getWeekdayName(): string{
+	export function weekdayName(): string{
 		let dayString: string
-		switch (getTimeComponent(TimeType.Weekday))
+		switch (timeComponent(TimeType.Weekday))
 		{
 			case 0:
 				dayString = "Monday"
@@ -178,11 +178,11 @@ namespace gatorRTC {
 	* Get RTC time in HH:MM:SS format
 	*/
 	//% weight=43
-	//% blockId="gatorRTC_getTime"
+	//% blockId="gatorRTC_time"
 	//% block="time in HH:MM:SS"
-	export function getTime(): string{
-		let minutes = getTimeComponent(TimeType.Minutes)
-		let seconds = getTimeComponent(TimeType.Seconds)
+	export function time(): string{
+		let minutes = timeComponent(TimeType.Minutes)
+		let seconds = timeComponent(TimeType.Seconds)
 		let minuteDelimiterString: string = ":"
 		let secondDelimiterString: string = ":"
 		let ampmString: string = ""
@@ -202,7 +202,7 @@ namespace gatorRTC {
 				ampmString = " PM"
 			}
 		}
-		let timeString: string = getTimeComponent(TimeType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds + ampmString
+		let timeString: string = timeComponent(TimeType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds + ampmString
 		return timeString
 	}
 	
@@ -214,8 +214,8 @@ namespace gatorRTC {
 	//% block="time in yyyy-mm-ddThh:mm:ss"
 	//% advanced=true
 	export function get8601Time(): string{
-		let minutes = getTimeComponent(TimeType.Minutes)
-		let seconds = getTimeComponent(TimeType.Seconds)
+		let minutes = timeComponent(TimeType.Minutes)
+		let seconds = timeComponent(TimeType.Seconds)
 		let minuteDelimiterString: string = ":"
 		let secondDelimiterString: string = ":"
 		if (minutes < 10)
@@ -226,7 +226,7 @@ namespace gatorRTC {
 		{
 			secondDelimiterString = ":0"
 		}
-		let timeString: string = "20" + getTimeComponent(TimeType.Year) + "-" + getTimeComponent(TimeType.Month) + "-" + getTimeComponent(TimeType.Date) + "T" + getTimeComponent(TimeType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds
+		let timeString: string = "20" + timeComponent(TimeType.Year) + "-" + timeComponent(TimeType.Month) + "-" + timeComponent(TimeType.Date) + "T" + timeComponent(TimeType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds
 		return timeString
 	}
 	
@@ -234,10 +234,10 @@ namespace gatorRTC {
 	* Get RTC date in mm-dd-yyyy
 	*/
 	//% weight=41
-	//% blockId="gatorRTC_getDateUSA"
+	//% blockId="gatorRTC_dateUSA"
 	//% block="date in mm-dd-yyyy"
-	export function getDateUSA(): string{
-		let timeString: string = getTimeComponent(TimeType.Month) + "-" + getTimeComponent(TimeType.Date) + "-" + "20" + getTimeComponent(TimeType.Year)
+	export function dateUSA(): string{
+		let timeString: string = timeComponent(TimeType.Month) + "-" + timeComponent(TimeType.Date) + "-" + "20" + timeComponent(TimeType.Year)
 		return timeString
 	}
 	
@@ -245,11 +245,11 @@ namespace gatorRTC {
 	* Get RTC date in dd-mm-yyyy
 	*/
 	//% weight=40
-	//% blockId="gatorRTC_getDateWorld"
+	//% blockId="gatorRTC_dateWorld"
 	//% block="date in dd-mm-yyyy"
 	//% advanced=true
-	export function getDateWorld(): string{
-		let timeString: string = getTimeComponent(TimeType.Date) + "-" + getTimeComponent(TimeType.Month) + "-" + "20" + getTimeComponent(TimeType.Year)
+	export function dateWorld(): string{
+		let timeString: string = timeComponent(TimeType.Date) + "-" + timeComponent(TimeType.Month) + "-" + "20" + timeComponent(TimeType.Year)
 		return timeString
 	}
 	
@@ -257,11 +257,11 @@ namespace gatorRTC {
 	* Get RTC timestamp from button press in HH:MM:SS format
 	*/
 	//% weight=39
-	//% blockId="gatorRTC_getTimestamp"
+	//% blockId="gatorRTC_timestamp"
 	//% block="button timestamp in HH:MM:SS"
-	export function getTimestamp(): string{
-		let minutes = getTimestampComponent(TimeStampType.Minutes)
-		let seconds = getTimestampComponent(TimeStampType.Seconds)
+	export function timestamp(): string{
+		let minutes = timestampComponent(TimeStampType.Minutes)
+		let seconds = timestampComponent(TimeStampType.Seconds)
 		let minuteDelimiterString: string = ":"
 		let secondDelimiterString: string = ":"
 		let ampmString: string = ""
@@ -281,7 +281,7 @@ namespace gatorRTC {
 				ampmString = " PM"
 			}
 		}
-		let timeString: string = getTimestampComponent(TimeStampType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds + ampmString
+		let timeString: string = timestampComponent(TimeStampType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds + ampmString
 		return timeString
 	}
 	
@@ -293,8 +293,8 @@ namespace gatorRTC {
 	//% block="button timestamp in yyyy-mm-ddThh:mm:ss"
 	//% advanced=true
 	export function get8601Timestamp(): string{
-		let minutes = getTimestampComponent(TimeStampType.Minutes)
-		let seconds = getTimestampComponent(TimeStampType.Seconds)
+		let minutes = timestampComponent(TimeStampType.Minutes)
+		let seconds = timestampComponent(TimeStampType.Seconds)
 		let minuteDelimiterString: string = ":"
 		let secondDelimiterString: string = ":"
 		if (minutes < 10)
@@ -305,7 +305,7 @@ namespace gatorRTC {
 		{
 			secondDelimiterString = ":0"
 		}
-		let timeString: string = "20" + getTimestampComponent(TimeStampType.Year) + "-" + getTimestampComponent(TimeStampType.Month) + "-" + getTimestampComponent(TimeStampType.Date) + "T" + getTimestampComponent(TimeStampType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds
+		let timeString: string = "20" + timestampComponent(TimeStampType.Year) + "-" + timestampComponent(TimeStampType.Month) + "-" + timestampComponent(TimeStampType.Date) + "T" + timestampComponent(TimeStampType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds
 		return timeString
 	}
 	
@@ -313,10 +313,10 @@ namespace gatorRTC {
 	* Get RTC button timestamp date in mm-dd-yyyy
 	*/
 	//% weight=37
-	//% blockId="gatorRTC_getDateUSATimestamp"
+	//% blockId="gatorRTC_dateUSATimestamp"
 	//% block="button timestamp date in mm-dd-yyyy"
-	export function getDateUSATimestamp(): string{
-		let timeString: string = getTimestampComponent(TimeStampType.Month) + "-" + getTimestampComponent(TimeStampType.Date) + "-" + "20" + getTimestampComponent(TimeStampType.Year)
+	export function dateUSATimestamp(): string{
+		let timeString: string = timestampComponent(TimeStampType.Month) + "-" + timestampComponent(TimeStampType.Date) + "-" + "20" + timestampComponent(TimeStampType.Year)
 		return timeString
 	}
 	
@@ -324,11 +324,11 @@ namespace gatorRTC {
 	* Get RTC button timestamp date in dd-mm-yyyy
 	*/
 	//% weight=36
-	//% blockId="gatorRTC_getDateWorldTimestamp"
+	//% blockId="gatorRTC_dateWorldTimestamp"
 	//% block="button timestamp date in dd-mm-yyyy"
 	//% advanced=true
-	export function getDateWorldTimestamp(): string{
-		let timeString: string = getTimestampComponent(TimeStampType.Date) + "-" + getTimestampComponent(TimeStampType.Month) + "-" + "20" + getTimestampComponent(TimeStampType.Year)
+	export function dateWorldTimestamp(): string{
+		let timeString: string = timestampComponent(TimeStampType.Date) + "-" + timestampComponent(TimeStampType.Month) + "-" + "20" + timestampComponent(TimeStampType.Year)
 		return timeString
 	}
 	
@@ -336,11 +336,11 @@ namespace gatorRTC {
 	* Get's one component of the most recent button timestamp on the RTC. Select which component you would like to get from the drop down.
 	*/
 	//% weight=35
-	//% blockId="gatorRTC_getTimestampComponent"
+	//% blockId="gatorRTC_timestampComponent"
 	//% block="value of button timestamp %timeComponent"
-	//% shim=gatorRTC::getTimestampComponent
+	//% shim=gatorRTC::timestampComponent
 	//% advanced=true
-	export function getTimestampComponent(timeComponent: TimeStampType): number{
+	export function timestampComponent(timeComponent: TimeStampType): number{
 		return 0
 	}
 	
