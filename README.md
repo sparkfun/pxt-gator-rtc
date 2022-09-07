@@ -90,7 +90,7 @@ serial.writeString(gatorRTC.dateUSATimestamp())
 
 Use ``||serial write string ||button timestamp date in mm-dd-yyyy|| ||`` to write the button timestamp date in mm-dd-yyyy over serial
 
-##Advanced Blocks
+## Advanced Blocks
 
 ```blocks
 //Sets the time to whatever you choose in 24 hour mode
