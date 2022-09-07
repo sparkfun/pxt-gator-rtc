@@ -4,11 +4,14 @@
 
 The gator:rtc is a gator clippable RTC based on the RV3028 by Micro Crystal. It's accurate to 1 PPM and runs at extraordinarily low power.
 
-![SparkFun gator:light](https://raw.githubusercontent.com/sparkfun/pxt-gator-rtc/master/icon.png)  
+[![SparkFun gator:rtc](https://raw.githubusercontent.com/sparkfun/pxt-gator-rtc/master/icon.png)](https://www.sparkfun.com/products/15486)
+
+[*SparkFun gator:rtc (15486)*](https://www.sparkfun.com/products/15486)
+
 
 ## ~ hint
 
-To use this package, go to https://makecode.microbit.org, click ``Add package`` and search for **gator-rtc**. The package is located [here](https://makecode.microbit.org/pkg/sparkfun/pxt-gator-rtc)
+To use this extension, go to https://makecode.microbit.org, click ``Extensions`` and search for **gator-rtc**. The package is located [here](https://makecode.microbit.org/pkg/sparkfun/pxt-gator-rtc)
 
 ## ~
 
@@ -47,47 +50,47 @@ Use ``||set **Seconds** to 5||`` to set the seconds component of your time to 5.
 
 ```blocks
 //Using Serial write to write the seconds component of your timestamp
-serial.writeNumber(gatorRTC.getTimeComponent(TimeType.Seconds))
+serial.writeNumber(gatorRTC.timeComponent(TimeType.Seconds))
 ```
 
 Use ``||serial write number ||value of **Seconds**|| ||`` to write the seconds value out over serial.
 
 ```blocks
 //Using Serial write to write the name of the weekday
-serial.writeString(gatorRTC.getWeekdayName())
+serial.writeString(gatorRTC.weekdayName())
 ```
 
 Use ``||serial write string ||text of weekday|| ||`` to write the day of the week out over serial.
 
 ```blocks
 //Using Serial write to write the time in HH:MM:SS
-serial.writeString(gatorRTC.getTime())
+serial.writeString(gatorRTC.time())
 ```
 
 Use ``||serial write string ||time in HH:MM:SS|| ||`` to write the time in HH:MM:SS over serial
 
 ```blocks
 //Using Serial write to write the date in mm-dd-yyyy
-serial.writeString(gatorRTC.getDateUSA())
+serial.writeString(gatorRTC.dateUSA())
 ```
 
 Use ``||serial write string ||date in mm-dd-yyyy|| ||`` to write the date in mm-dd-yyyy over serial
 
 ```blocks
 //Using Serial write to write the timestamp in HH:MM:SS
-serial.writeString(gatorRTC.getTimestamp())
+serial.writeString(gatorRTC.timestamp())
 ```
 
 Use ``||serial write string ||button timestamp in HH:MM:SS|| ||`` to write the button timestamp in HH:MM:SS over serial
 
 ```blocks
 //Using Serial write to write the date of the timestamp in mm-dd-yyyy
-serial.writeString(gatorRTC.getDateUSATimestamp())
+serial.writeString(gatorRTC.dateUSATimestamp())
 ```
 
 Use ``||serial write string ||button timestamp date in mm-dd-yyyy|| ||`` to write the button timestamp date in mm-dd-yyyy over serial
 
-##Advanced Blocks
+## Advanced Blocks
 
 ```blocks
 //Sets the time to whatever you choose in 24 hour mode
@@ -106,7 +109,7 @@ Use ``||serial write string ||time in yyyy-mm-ddThh:mm:ss|| ||`` to write the ti
 
 ```blocks
 //Using Serial write to write the date in dd-mm-yyyy
-serial.writeString(gatorRTC.getDateWorld())
+serial.writeString(gatorRTC.dateWorld())
 ```
 
 Use ``||serial write string ||date in dd-mm-yyyy|| ||`` to write the date in dd-mm-yyyy over serial
@@ -120,7 +123,7 @@ Use ``||serial write string ||button timestamp in yyyy-mm-ddThh:mm:ss|| ||`` to 
 
 ```blocks
 //Using Serial write to write the timestamp date in dd-mm-yyyy
-serial.writeString(gatorRTC.getDateWorld())
+serial.writeString(gatorRTC.dateWorld())
 ```
 
 Use ``||serial write string ||button timestamp date in dd-mm-yyyy|| ||`` to write the button timestamp date in dd-mm-yyyy over serial
@@ -148,11 +151,11 @@ gatorRTC.set12Time(
 Afternoon.PM
 )
 basic.forever(function () {
-    serial.writeString(gatorRTC.getWeekdayName())
+    serial.writeString(gatorRTC.weekdayName())
     serial.writeString(", ")
-    serial.writeString(gatorRTC.getDateUSA())
+    serial.writeString(gatorRTC.dateUSA())
     serial.writeString(", ")
-    serial.writeLine(gatorRTC.getTime())
+    serial.writeLine(gatorRTC.time())
     basic.pause(10000)
 })
 ```
