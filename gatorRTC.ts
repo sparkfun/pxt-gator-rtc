@@ -70,6 +70,9 @@
 	PM=1
  }
 
+/**
+* Functions for working with the gator:RTC
+*/
 //% color=#f44242 
 //% icon="\uf017"
 namespace gatorRTC {
@@ -118,7 +121,7 @@ namespace gatorRTC {
 	}
 	
 	/**
-	* Set's one component of the time on the RTC. Select which component you would like to set from the drop down.
+	* Sets one component of the time on the RTC. Select which component you would like to set from the drop down.
 	*/
 	//% weight=46
 	//% blockId="gatorRTC_setTimeComponent"
@@ -140,7 +143,7 @@ namespace gatorRTC {
 	}
 	
 	/**
-	* Get's one component of the time on the RTC. Select which component you would like to get from the drop down.
+	* Gets one component of the time on the RTC. Select which component you would like to get from the drop down.
 	*/
 	//% weight=44
 	//% blockId="gatorRTC_weekdayName"
@@ -333,7 +336,7 @@ namespace gatorRTC {
 	}
 	
 	/**
-	* Get's one component of the most recent button timestamp on the RTC. Select which component you would like to get from the drop down.
+	* Get one component of the most recent button timestamp on the RTC. Select which component you would like to get from the drop down.
 	*/
 	//% weight=35
 	//% blockId="gatorRTC_timestampComponent"
