@@ -41,6 +41,13 @@ enum time_order {
 uint8_t _time[TIME_ARRAY_LENGTH];
 uint8_t _timestamp[TIMESTAMP_ARRAY_LENGTH];
 
+
+//Constructor -- Specifies default configuration
+RV3028::RV3028( void )
+{
+	
+}
+
 //Configure RTC to output 1-12 hours
 //Converts any current hour setting to 12 hour
 void RV3028::set12Hour()

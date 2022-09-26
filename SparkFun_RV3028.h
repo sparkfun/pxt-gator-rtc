@@ -138,6 +138,8 @@ class RV3028
 {
   public:
 	
+	//Constructor generates default settings.
+	//(over-ride after construction if desired)
     RV3028( void );
 
 	bool setTime(uint8_t sec, uint8_t min, uint8_t hour, uint8_t date, uint8_t month, uint8_t year, uint8_t day);
