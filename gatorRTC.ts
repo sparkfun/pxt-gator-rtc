@@ -112,7 +112,7 @@ namespace gatorRTC {
 	*/
 	//% weight=47
 	//% blockId="gatorRTC_setDate"
-	//% block="set date to %weekday|, %month |-%day |-20%year"
+	//% block="set date to %weekday|,%month|-%day|-20%year"
 	//% day.min=1 day.max=31
 	//% year.min=0 year.max=99
 	//% shim=gatorRTC::setDate
