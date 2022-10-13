@@ -21,8 +21,6 @@ Distributed as-is; no warranty is given.
 #include "MicroBit.h"
 #endif
 
-#define TIME_ARRAY_LENGTH 7
-#define TIMESTAMP_ARRAY_LENGTH 6 // Total number of writable values in device
 
 #include "pxt.h"
 
@@ -39,13 +37,15 @@ enum time_order {
 };
 
 uint8_t _time[TIME_ARRAY_LENGTH];
-uint8_t _timestamp[TIMESTAMP_ARRAY_LENGTH];
+//uint8_t _timestamp[TIMESTAMP_ARRAY_LENGTH];
 
 
 //Constructor -- Specifies default configuration
 RV3028::RV3028( void )
 {
-	
+	_tsCount = 0;
+	_previousTsCount = 0;
+	_timestampInitialized = false;
 }
 
 //Configure RTC to output 1-12 hours
@@ -147,6 +147,7 @@ void RV3028::setWeekday(uint8_t value)
 
 void RV3028::initializeTimestamping()
 {
+
 	if (_timestampInitialized == false)
 	{
 		uint8_t setting = readRegister(RV3028_CTRL2);
@@ -171,18 +172,30 @@ void RV3028::updateTime()
 }
 
 bool RV3028::updateTimestamp()
-{
+{	
 	initializeTimestamping();
 	bool newStamp = false;
-	_tsCount = readRegister(RV3028_COUNT_TS);
+	_tsCount = readRegister(RV3028_COUNT_TS);	
 	if (_tsCount != _previousTsCount)
 	{
 		newStamp = true;
 		readMultipleRegisters(RV3028_SECONDS_TS, _timestamp, TIMESTAMP_ARRAY_LENGTH);
-		if(is12Hour()) _timestamp[TIME_HOURS] &= ~(1<<HOURS_AM_PM); //Remove this bit from value
+
+		if(is12Hour()) {
+			_timestamp[TIME_HOURS] &= ~(1<<HOURS_AM_PM); //Remove this bit from value
+		}
+
 	}
 	_previousTsCount = _tsCount;
 	return newStamp;
+}
+
+bool RV3028::getTimeStampInitialized()
+{
+	if (_timestampInitialized == false)
+		return false;
+	else
+		return true;
 }
 
 uint8_t RV3028::getSeconds()
@@ -273,9 +286,6 @@ void RV3028::readMultipleRegisters(uint8_t addr, uint8_t * dest, uint8_t len)
 {
 	uBit.i2c.readRegister(RV3028_ADDR, addr, dest, len);
 }
-
-
-
 
 void RV3028::writeRegister(uint8_t addr, uint8_t val)
 {

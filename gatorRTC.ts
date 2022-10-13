@@ -76,8 +76,7 @@
 //% color=#f44242 
 //% icon="\uf017"
 namespace gatorRTC {
-	// Functions for reading and setting time on the gator:RTC
-	
+
 	/**
 	* Set RTC time in HH:MM:SS in 12 hour format format
 	*/
@@ -263,6 +262,7 @@ namespace gatorRTC {
 	//% blockId="gatorRTC_timestamp"
 	//% block="button timestamp in HH:MM:SS"
 	export function timestamp(): string{
+		let hours = timestampComponent(TimeStampType.Hours)
 		let minutes = timestampComponent(TimeStampType.Minutes)
 		let seconds = timestampComponent(TimeStampType.Seconds)
 		let minuteDelimiterString: string = ":"
@@ -284,7 +284,8 @@ namespace gatorRTC {
 				ampmString = " PM"
 			}
 		}
-		let timeString: string = timestampComponent(TimeStampType.Hours) + minuteDelimiterString + minutes + secondDelimiterString + seconds + ampmString
+		let timeStringfirst = hours + minuteDelimiterString + minutes;
+		let timeString: string = hours + minuteDelimiterString + minutes + secondDelimiterString + seconds + ampmString
 		return timeString
 	}
 	
@@ -351,7 +352,7 @@ namespace gatorRTC {
 	* Switch between standard (12 hour) and military (24 hour) time formats
 	*/
 	//% weight=34
-	//% blockId="gatorgatorRTC_set1224Mode"
+	//% blockId="gatorRTC_set1224Mode"
 	//% block="set to %timeType| time"
 	//% advanced=true
 	export function set1224Mode(timeType: TimeMode){

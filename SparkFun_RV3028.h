@@ -20,9 +20,9 @@ Distributed as-is; no warranty is given.
 
 #pragma once
 
-#ifndef __MBED_H_
-#define __MBED_H_
-#include "mbed.h"
+#ifndef _CSTDINT_
+#define _CSTDINT_
+#include <cstdint>
 #endif
 
 //The 7-bit I2C address of the RV3028
@@ -134,6 +134,9 @@ Distributed as-is; no warranty is given.
 #define RV3028_EEPROM_CMD				0x27
 #define RV3028_ID						0x28
 
+#define TIME_ARRAY_LENGTH 7
+#define TIMESTAMP_ARRAY_LENGTH 6 // Total number of writable values in device
+
 class RV3028
 {
   public:
@@ -189,9 +192,14 @@ class RV3028
     void writeRegister(uint8_t addr, uint8_t val);
 	void readMultipleRegisters(uint8_t addr, uint8_t * dest, uint8_t len);
 	void writeMultipleRegisters(uint8_t addr, uint8_t * values, uint8_t len);
+
+	bool getTimeStampInitialized();
 	
 	private:
 	uint8_t _tsCount = 0;
 	uint8_t _previousTsCount = 0;
 	bool _timestampInitialized = false;
+	uint8_t _timestamp[TIMESTAMP_ARRAY_LENGTH] = {0};
+	
+
 };
